@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = 
 CFLAGS        = -pipe -g -fPIC -Wall -W $(DEFINES)
 CXXFLAGS      = -pipe -g -fPIC -Wall -W $(DEFINES)
-INCPATH       = -I. -IHeader -I/usr/lib/i386-linux-gnu/qt5/mkspecs/linux-g++
+INCPATH       = -I. -I../sst_str01_lib/Header -IHeader -I/usr/lib/i386-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/i386-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -48,11 +48,13 @@ OBJECTS_DIR   = ./
 SOURCES       = sstMath01Lib.cpp \
 		sstMath01Pnt1.cpp \
 		sstMath01Trn1.cpp \
-		sstMath01Trn2.cpp 
+		sstMath01Trn2.cpp \
+		sstMath01Mima2.cpp 
 OBJECTS       = sstMath01Lib.o \
 		sstMath01Pnt1.o \
 		sstMath01Trn1.o \
-		sstMath01Trn2.o
+		sstMath01Trn2.o \
+		sstMath01Mima2.o
 DIST          = /usr/lib/i386-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/i386-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/i386-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -108,7 +110,8 @@ DIST          = /usr/lib/i386-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		sstMath01LibInt.h sstMath01Lib.cpp \
 		sstMath01Pnt1.cpp \
 		sstMath01Trn1.cpp \
-		sstMath01Trn2.cpp
+		sstMath01Trn2.cpp \
+		sstMath01Mima2.cpp
 QMAKE_TARGET  = sstMath01Lib_d
 DESTDIR       = ../libs/#avoid trailing-slash linebreak
 TARGET        = libsstMath01Lib_d.a
@@ -306,6 +309,11 @@ sstMath01Trn1.o: sstMath01Trn1.cpp Header/sstMath01Lib.h \
 sstMath01Trn2.o: sstMath01Trn2.cpp Header/sstMath01Lib.h \
 		sstMath01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMath01Trn2.o sstMath01Trn2.cpp
+
+sstMath01Mima2.o: sstMath01Mima2.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
+		Header/sstMath01Lib.h \
+		sstMath01LibInt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMath01Mima2.o sstMath01Mima2.cpp
 
 ####### Install
 

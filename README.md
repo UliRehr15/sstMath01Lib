@@ -9,4 +9,5 @@ Coordinate Transformations classes between
   - Device (Screen) Coordinates
 
 
-20170107: Version 1.0: First Check In.
+20170107: Version 1.0: First Check In. <BR>
+20170411: Version 1.1: Minimum Boundary Rectangle (Mbr) class with some functions. <BR>

@@ -29,31 +29,6 @@
 
 //==============================================================================
 /**
-* @brief 2D Minimum Bounding Rectangle
-*
-* Changed: 06.01.17  Re.
-*
-* @ingroup sstMath01Lib
-*
-* @author Re.
-*
-* @date 06.01.17
-*/
-// ----------------------------------------------------------------------------
-class sstMath01Mbr2Cls
-{
-  public:   // Public functions
-     sstMath01Mbr2Cls();  // Constructor
-// ----------------------------------------------------------------------------
-     double XI;   /**< Lower, left corner */
-     double YI;   /**< Lower, left corner */
-     double XA;   /**< Upper, right corner */
-     double YA;   /**< Upper, right corner */
-  private:  // Private functions
-};
-
-//==============================================================================
-/**
 * @brief 2D integer point
 *
 * Changed: 06.01.17  Re.
@@ -74,8 +49,6 @@ class sstMath01iPnt2Cls
      int   y;                  /**< Integer Point coordinates */
   private:  // Private functions
 };
-//-----------------------------------------------------------------------------
-
 //==============================================================================
 /**
 * @brief 3D unsigned long integer point
@@ -165,6 +138,345 @@ class sstMath01dPnt3Cls
   private:  // Private functions
 };
 //==============================================================================
+/**
+* @brief 2D Minimum Bounding Rectangle
+*
+* Changed: 06.01.17  Re.
+*
+* @ingroup sstMath01Lib
+*
+* @author Re.
+*
+* @date 06.01.17
+*/
+// ----------------------------------------------------------------------------
+class sstMath01Mbr2Cls
+{
+  public:   // Public functions
+     sstMath01Mbr2Cls();  // Constructor
+// ----------------------------------------------------------------------------
+     double XI;   /**< Lower, left corner */
+     double YI;   /**< Lower, left corner */
+     double XA;   /**< Upper, right corner */
+     double YA;   /**< Upper, right corner */
+
+     //==============================================================================
+     /**
+     * @brief Min-Max initialisieren
+     *
+     * iStat = Mia_2Ini_c  ( Key, *Mima);
+     *
+     * Kommentar 1
+     *
+     * Geändert: 06.02.03  UR
+     *
+     * @param iKey  [in]  Vorerst immer 0
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     int Mia_2Ini_c ( int    iKey);
+     //==============================================================================
+     /**
+     * @brief Min-Max mit einem Punkt initialisieren
+     *
+     * iStat = Mia_2IniPkt ( Key, *Mima, X1, Y1);
+     *
+     * Weiterer Kommentar
+     *
+     * Geändert: 13.05.04
+     *
+     * @param iKey  [in] Vorerst immer 0
+     * @param X1    [in] Eingabe-Punkt X
+     * @param Y1    [in] Eingabe-Punkt Y
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     int Mia_2IniPkt_c( int      iKey,   // v  -> Key vorerst immer 0
+                        double   X1,     // v  -> x Punkt 1
+                        double   Y1);    // v  -> y Punkt 1
+     //==============================================================================
+     /**
+     * @brief Min-Max mit einer 2D-Geraden initialisieren
+     *
+     * iStat = Mia_2IniLin_c( Key, *Mima, X1, Y1, X2, Y2);
+     *
+     * Kommentar 1
+     *
+     * Geändert: 06.02.03  UR
+     *
+     * @param iKey [in]     Vorerst immer 0
+     * @param X1   [in]     x Punkt 1
+     * @param Y1   [in]     y Punkt 1
+     * @param X2   [in]     x Punkt 2
+     * @param Y2   [in]     y Punkt 2
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     int Mia_2IniLin_c( int      iKey,   // v  -> Key vorerst immer 0
+                        double   X1,     // v  -> x Punkt 1
+                        double   Y1,     // v  -> y Punkt 1
+                        double   X2,     // v  -> x Punkt 2
+                        double   Y2);    // v  -> y Punkt 2
+
+     //==============================================================================
+     /**
+     * @brief Abfrage:Min-Max-Werte in Ordnung ??
+     *
+     * iStat = Mia_2OK_c ( Key, *Mima);
+     *
+     * Kommentar 1
+     *
+     * Geändert: 06.02.03  UR
+     *
+     * @param iKey  [in]     Vorerst immer 0
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     int Mia_2OK_c ( int      iKey);
+     //==============================================================================
+     /**
+     * @brief Min-Max mit Koordinaten abgleichen
+     *
+     * iStat = Mia_2Koor_c ( Key, *Mima,  X,  Y);
+     *
+     * Kommentar 1
+     *
+     * Geändert: 06.02.03  UR
+     *
+     * @param iKey  [in]     Vorerst immer 0
+     * @param X     [in]     Prüfwert: Punkt-X
+     * @param Y     [in]     Prüfwert: Punkt-Y
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     int Mia_2Koor_c ( int      iKey,   // Vorerst immer 0
+                       double   X,     // Prüfwert: Punkt-X
+                       double   Y);    // Prüfwert: Punkt-Y
+     //==============================================================================
+     /**
+     * @brief Min-Max-Bereich mit D2-Punkt abgleichen
+     *
+     * iStat = Mia_2Pkt_c ( Key, *Mima, *Pkt);
+     *
+     * Kommentar 1
+     *
+     * Geändert: 06.08.03  UR
+     *
+     * @param iKey  [in]     Vorerst immer 0
+     * @param Pkt   [in]     Prüfwert: D2-Punkt
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     int Mia_2Pkt_c( int         iKey,   // v -> Key vorerst immer 0
+                     sstMath01dPnt2Cls *Pkt);   //   -> Prüfwert: D2-Punkt
+
+     //==============================================================================
+     /**
+     * @brief Koordinate mit Min-Max überprüfen
+     *
+     * iStat = Mia_2Pruef_c ( Key, *Mima, X, Y);
+     *
+     * Prüfen, ob eine Koordinate innerhalb der Min-Max-Werte liegen.
+     *
+     * Geändert: 06.02.03  UR
+     *
+     * @param iKey  [in] Vorerst immer 0
+     * @param X     [in] Prüfwert: Punkt-X
+     * @param Y     [in] Prüfwert: Punkt-Y
+     *
+     * @return Fehlerstatus
+     *
+     * @retval     0 : Prüfpunkt liegt innerhalb
+     * @retval bit 0 : X außerhalb der Min-Max-Werte
+     * @retval bit 1 : Y außerhalb der Min-Max-Werte
+     * @retval    -1 : Feld Mima nicht korrekt
+     * @retval   -10 : unzulässiger Key <> 0
+     */
+     int Mia_2Pruef_c ( int      iKey,   // Vorerst immer 0
+                        double   X,     // Prüfwert: Punkt-X
+                        double   Y);    // Prüfwert: Punkt-Y
+
+     //==============================================================================
+     /**
+     * @brief Koordinate mit Min-Max überprüfen
+     *
+     * iStat = Mia_2Pruef_c ( Key, *Mima, X, Y);
+     *
+     * Prüfen, ob eine Koordinate innerhalb der Min-Max-Werte liegen.
+     *
+     * Geändert: 06.02.03  UR
+     *
+     * @param iKey  [in] Vorerst immer 0
+     * @param X     [in] Prüfwert: Punkt-X
+     * @param Y     [in] Prüfwert: Punkt-Y
+     * @param Tol   [in] Tolerance Value
+     *
+     * @return Fehlerstatus
+     *
+     * @retval     0 : Prüfpunkt liegt innerhalb
+     * @retval bit 0 : X außerhalb der Min-Max-Werte
+     * @retval bit 1 : Y außerhalb der Min-Max-Werte
+     * @retval    -1 : Feld Mima nicht korrekt
+     * @retval   -10 : unzulässiger Key <> 0
+     */
+     int Mia_2PruefT_c( int    iKey,    // v  -> Key vorerst immmer 0
+                        double   X,      // v  -> Prüfwert: Punkt-X
+                        double   Y,      // v  -> Prüfwert: Punkt-Y
+                        double   Tol);    // v  -> Toleranzwert
+     //==============================================================================
+     /**
+     * @brief Test, ob Überdeckung vorliegt
+     *
+     * iSat = Mia_2Box_c ( Key, *Mima1, *Mima2);
+     *
+     * Geändert: 06.02.03  UR
+     *
+     * @param iKey   [in] Vorerst immer 0
+     * @param Mima2  [in] Min-Max-Werte : Eingabebereich 2
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =1: Boxen berühren sich oder überdecken sich
+     * @retval   =0: Keine Überdeckung oder Berührung
+     * @retval   <0: allgemeiner Fehler
+     */
+     int Mia_2Box_c ( int      iKey,    // v -> vorerst immer null
+                      sstMath01Mbr2Cls *Mima2); //   -> Min-Max-Werte : Eingabebereich 2
+     //==============================================================================
+     /**
+     * @brief Min-Max verschneiden
+     *
+     * iStat = Mia_2Ber_c ( Key, *Mima1, *Mima2, *Mima3);
+     *
+     * Eingabe-Key = 0 : Gesamtbereich bilden
+     * Eingabe-Key = 1 : Schnittbereich bilden
+     *
+     * Geändert: 06.02.03  UR
+     *
+     * @param iKey   [in]  0 oder 1
+     * @param Mima2 [in]  Min-Max-Werte : Eingabebereich 2
+     * @param Mima3 [out] Min-Max-Werte : Rückgabebereich
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     int Mia_2Ber_c ( int      iKey,     // 0 oder 1
+                      sstMath01Mbr2Cls *Mima2,   // Min-Max-Werte : Eingabebereich 2
+                      sstMath01Mbr2Cls *Mima3);  // Min-Max-Werte : Rückgabebereich
+     //==============================================================================
+     /**
+     * @brief Min-Max abfragen
+     *
+     * iStat = Mia_2Les_c ( Key, *Mima, *D);
+     *
+     * Key = 0 : Rückgabe in D: Min X
+     * Key = 1 : Rückgabe in D: Min Y
+     * Key = 3 : Rückgabe in D: Max X
+     * Key = 4 : Rückgabe in D: Max Y
+     * Key = 6 : Rückgabe in D: Länge X
+     * Key = 7 : Rückgabe in D: Länge Y
+     *
+     * Geändert: 06.02.03  UR
+     *
+     * @param iKey  [in]      0 bis 7
+     * @param D     [out]     Ergebnis D
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     int Mia_2Les_c ( int      iKey,   // 0 bis 7
+                      double  *D);     // Ergebnis D
+     //==============================================================================
+     /**
+     * @brief Mittelpunkt einer MinMax-Box rechnen
+     *
+     * iStat = Mia_2Centr_c ( Key, *Mima, *Pkt);
+     *
+     * Kommentar 1
+     *
+     * Geändert: 06.02.03  UR
+     *
+     * @param iKey  [in]     Vorerst immer 0
+     * @param Pkt   [out]    Mittelpunkt
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     int Mia_2Centr_c ( int      iKey,     // v  -> Vorerst immer 0
+                        sstMath01dPnt2Cls  *Pkt);    //   <-> Mittelpunkt
+     //==============================================================================
+     /**
+     * @brief MinMax-Box um Dx und Dy verschieben
+     *
+     * iStat = Mia_2Move_XY_c ( Key, *Mima, Dx, Dy);
+     *
+     * Kommentar 1
+     *
+     * Geändert: 06.08.03  UR
+     *
+     * @param iKey  [in]     Vorerst immer 0
+     * @param Dx    [in]     Verschiebungswert X
+     * @param Dy    [in]     Verschiebungswert Y
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     int Mia_2Move_XY_c ( int         iKey,     // v  -> Vorerst immer 0
+                          double      Dx,      // v  -> Verschiebungswert X
+                          double      Dy);     // v  -> Verschiebungswert Y
+     //==============================================================================
+     /**
+     * @brief MinMax um MinMax-Mittelpunkt skalieren
+     *
+     * Skalierungswert  = 1.0: Keine Änderung
+     * Skalierungswert <= 0.0: Nicht erlaubt.
+     *
+     * Geändert: 02.02.04  UR
+     *
+     * 02.02.04: Aus Modul dxflage geholt.  UR
+     *
+     * @param iKey   [in]      Vorerst immer 0
+     * @param dScal  [in]      Skalierungswert
+     *
+     * @return Rückgabe Funktion
+     *
+     * @retval   =0 = OK
+     * @retval   -1 = Nicht erlaubter Key
+     * @retval   -2 = Skalierungswert zu klein
+     * @retval   <0 = Allgemeiner Fehler
+     */
+     int Mia_2Scal_c ( int      iKey,     // v  -> Vorerst immer 0
+                       double   dScal);
+     //==============================================================================
+
+  private:  // Private functions
+};
 /**
 * @brief 4D transformation matrix
 *

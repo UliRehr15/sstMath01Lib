@@ -24,13 +24,6 @@
 #include "sstMath01LibInt.h"
 
 
-sstMath01Mbr2Cls::sstMath01Mbr2Cls()
-{
-  this->XA = 0.0;
-  this->XI = 0.0;
-  this->YA = 0.0;
-  this->YI = 0.0;
-}
 
 sstMath01dPnt2Cls::sstMath01dPnt2Cls()
 {

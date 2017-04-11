@@ -277,7 +277,8 @@ compiler_clean:
 
 ####### Compile
 
-sstMath01LibTest.o: sstMath01LibTest.cpp ../Header/sstMath01Lib.h
+sstMath01LibTest.o: sstMath01LibTest.cpp ../Header/sstMath01Lib.h \
+		sstMath01LibTest.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMath01LibTest.o sstMath01LibTest.cpp
 
 ####### Install

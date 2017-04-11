@@ -8,7 +8,8 @@ CONFIG    -= release  # ist DEBUG aktiv
 
 CONFIG    += staticlib
 
-INCLUDEPATH = ./Header
+INCLUDEPATH += ../sst_str01_lib/Header
+INCLUDEPATH += ./Header
 
 
 HEADERS   += ./Header/sstMath01Lib.h  \
@@ -17,7 +18,8 @@ HEADERS   += ./Header/sstMath01Lib.h  \
 SOURCES		+= sstMath01Lib.cpp \
              sstMath01Pnt1.cpp \
              sstMath01Trn1.cpp \
-             sstMath01Trn2.cpp
+             sstMath01Trn2.cpp \
+    sstMath01Mima2.cpp
 
 OTHER_FILES += README.md
 
