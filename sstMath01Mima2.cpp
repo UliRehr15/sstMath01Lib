@@ -30,25 +30,25 @@
 //=============================================================================
 sstMath01Mbr2Cls::sstMath01Mbr2Cls()
 {
-  this->XA = 0.0;
-  this->XI = 0.0;
-  this->YA = 0.0;
-  this->YI = 0.0;
+  this->XI = +dSSTSTR01_UNDEF_R8;
+  this->YI = +dSSTSTR01_UNDEF_R8;
+  this->XA = -dSSTSTR01_UNDEF_R8;
+  this->YA = -dSSTSTR01_UNDEF_R8;
 }
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2Ini_c( int      key)
+int sstMath01Mbr2Cls::Ini2( int      key)
 //.............................................................................
 {
   if (key) return -10;   // Fehler : Key ungleich null
 //.............................................................................
-  this->XI = +dSSTSTR01_UNDEF_DOUBLE;   // dSSTSTR01_UNDEF_DOUBLE wird in "$UNDEF.H" definiert
-  this->YI = +dSSTSTR01_UNDEF_DOUBLE;   // Ist i.a. 1.0E+300
-  this->XA = -dSSTSTR01_UNDEF_DOUBLE;
-  this->YA = -dSSTSTR01_UNDEF_DOUBLE;
+  this->XI = +dSSTSTR01_UNDEF_R8;
+  this->YI = +dSSTSTR01_UNDEF_R8;
+  this->XA = -dSSTSTR01_UNDEF_R8;
+  this->YA = -dSSTSTR01_UNDEF_R8;
   return 0;              // Rückgabe immer 0: alles OK !!
 }
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2IniPkt_c( int      Key,    // v  -> Key vorerst immer 0
+int sstMath01Mbr2Cls::IniPkt2( int      Key,    // v  -> Key vorerst immer 0
                    double   X1,     // v  -> x Punkt 1
                    double   Y1)     // v  -> y Punkt 1
 //.............................................................................
@@ -64,7 +64,7 @@ int sstMath01Mbr2Cls::Mia_2IniPkt_c( int      Key,    // v  -> Key vorerst immer
   return 0;              // Rückgabe immer 0: alles OK !!
 }
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2IniLin_c( int      key,    // v  -> Key vorerst immer 0
+int sstMath01Mbr2Cls::IniLin2( int      key,    // v  -> Key vorerst immer 0
                    double   X1,     // v  -> x Punkt 1
                    double   Y1,     // v  -> y Punkt 1
                    double   X2,     // v  -> x Punkt 2
@@ -98,21 +98,21 @@ int sstMath01Mbr2Cls::Mia_2IniLin_c( int      key,    // v  -> Key vorerst immer
 }
 //-----------------------------------------------------------------------------
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2OK_c( int      key)
+int sstMath01Mbr2Cls::OK2( int      key)
 //.............................................................................
 {
   if (key != 0) return -1;            // Falscher key, Programmabbruch !!
 
-  if (this->XI ==  dSSTSTR01_UNDEF_DOUBLE) return 1;
-  if (this->XA == -dSSTSTR01_UNDEF_DOUBLE) return 1;
-  if (this->YI ==  dSSTSTR01_UNDEF_DOUBLE) return 1;
-  if (this->YA == -dSSTSTR01_UNDEF_DOUBLE) return 1;
+  if (this->XI ==  dSSTSTR01_UNDEF_R8) return 1;
+  if (this->XA == -dSSTSTR01_UNDEF_R8) return 1;
+  if (this->YI ==  dSSTSTR01_UNDEF_R8) return 1;
+  if (this->YA == -dSSTSTR01_UNDEF_R8) return 1;
   return 0;
 }
 
 //-----------------------------------------------------------------------------
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2Koor_c( int      key,    // v -> key vorerst immer 0
+int sstMath01Mbr2Cls::Koor2( int      key,    // v -> key vorerst immer 0
                  double   X,      // v -> Prüfwert: Punkt-X
                  double   Y)      // v -> Prüfwert: Punkt-Y
 //.............................................................................
@@ -147,7 +147,7 @@ int sstMath01Mbr2Cls::Mia_2Koor_c( int      key,    // v -> key vorerst immer 0
 }
 //-----------------------------------------------------------------------------
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2Pkt_c( int         Key,    // v -> Key vorerst immer 0
+int sstMath01Mbr2Cls::Pkt2( int         Key,    // v -> Key vorerst immer 0
                 sstMath01dPnt2Cls *Pkt)    //   -> Prüfwert: D2-Punkt
 //.............................................................................
 {
@@ -158,7 +158,7 @@ int sstMath01Mbr2Cls::Mia_2Pkt_c( int         Key,    // v -> Key vorerst immer 
   iRet = 0;                       // Voreinstellung 0
 
   // Min-Max mit Koordinaten abgleichen
-  iRet = this->Mia_2Koor_c ( Key,  Pkt->x,  Pkt->y);
+  iRet = this->Koor2 ( Key,  Pkt->x,  Pkt->y);
 
   return (iRet);
 }
@@ -227,7 +227,7 @@ int sstMath01Mbr2Cls::Mia_2Pkt_c( int         Key,    // v -> Key vorerst immer 
 //}
 //-----------------------------------------------------------------------------
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2Pruef_c( int      key,    // v -> Key vorerst immmer 0
+int sstMath01Mbr2Cls::Pruef2( int      key,    // v -> Key vorerst immmer 0
                   double   X,      // v -> Prüfwert: Punkt-X
                   double   Y)      // v -> Prüfwert: Punkt-Y
 //.............................................................................
@@ -236,7 +236,7 @@ int sstMath01Mbr2Cls::Mia_2Pruef_c( int      key,    // v -> Key vorerst immmer 
 //
   if (key) return -10;       // Unzulässiger Key
 //.............................................................................
-  ret = this->Mia_2OK_c(0);
+  ret = this->OK2(0);
   if (ret)
   { //.....................Test:   Feld z.T. auáerhalb der Dimensionen
     return -1;
@@ -263,7 +263,7 @@ int sstMath01Mbr2Cls::Mia_2Pruef_c( int      key,    // v -> Key vorerst immmer 
 }
 //-----------------------------------------------------------------------------
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2PruefT_c( int    Key,    // v  -> Key vorerst immmer 0
+int sstMath01Mbr2Cls::PruefT2( int    Key,    // v  -> Key vorerst immmer 0
                    double   X,      // v  -> Prüfwert: Punkt-X
                    double   Y,      // v  -> Prüfwert: Punkt-Y
                    double   Tol)    // v  -> Toleranzwert
@@ -273,7 +273,7 @@ int sstMath01Mbr2Cls::Mia_2PruefT_c( int    Key,    // v  -> Key vorerst immmer 
 //
   if (Key) return -10;       // Unzulässiger Key
 //.............................................................................
-  ret = this->Mia_2OK_c(0);
+  ret = this->OK2(0);
   if (ret)
   { //.....................Test:   Feld z.T. auáerhalb der Dimensionen
     return -1;
@@ -300,7 +300,7 @@ int sstMath01Mbr2Cls::Mia_2PruefT_c( int    Key,    // v  -> Key vorerst immmer 
 }
 //-----------------------------------------------------------------------------
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2Box_c( int               key,    // v -> vorerst immer null
+int sstMath01Mbr2Cls::Box2( int               key,    // v -> vorerst immer null
                                   sstMath01Mbr2Cls *Mima2)  //   -> Min-Max-Werte : Eingabebereich 2
 //.............................................................................
 {
@@ -308,12 +308,12 @@ int sstMath01Mbr2Cls::Mia_2Box_c( int               key,    // v -> vorerst imme
 //.............................................................................
   if (key != 0)  return -10; // Unzulässiger Key
 //.............................................................................
-  ret = this->Mia_2OK_c(0);
+  ret = this->OK2(0);
   if (ret)
   { //...........................Feld 1 z.T. auáerhalb der Dimensionen
     return -1;
   }
-  ret = Mima2->Mia_2OK_c(0);
+  ret = Mima2->OK2(0);
   if (ret)
   { //...........................Feld 2 z.T. auáerhalb der Dimensionen
     return -1;
@@ -329,7 +329,7 @@ int sstMath01Mbr2Cls::Mia_2Box_c( int               key,    // v -> vorerst imme
 }
 //-----------------------------------------------------------------------------
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2Ber_c( int      key,   // v -> Eingabe-Key = 0 : Gesamtbereich bilden
+int sstMath01Mbr2Cls::Ber2( int      key,   // v -> Eingabe-Key = 0 : Gesamtbereich bilden
                                 //      Eingabe-Key = 1 : Schnittbereich bilden
                 sstMath01Mbr2Cls *Mima2, //   -> Min-Max-Werte : Eingabebereich 2
                 sstMath01Mbr2Cls *Mima3) //  <-  Min-Max-Werte : Rückgabebereich
@@ -340,12 +340,12 @@ int sstMath01Mbr2Cls::Mia_2Ber_c( int      key,   // v -> Eingabe-Key = 0 : Gesa
 //.............................................................................
   if ((key != 0) && (key != 1)) return -10; // Unzulässiger Key
 //.............................................................................
-  ret = this->Mia_2OK_c(0);
+  ret = this->OK2(0);
   if (ret)
   { //...........................Feld 1 z.T. außerhalb der Dimensionen
     return -1;
   }
-  ret = Mima2->Mia_2OK_c(0);
+  ret = Mima2->OK2(0);
   if (ret)
   { //...........................Feld 2 z.T. außerhalb der Dimensionen
     return -2;
@@ -362,7 +362,7 @@ int sstMath01Mbr2Cls::Mia_2Ber_c( int      key,   // v -> Eingabe-Key = 0 : Gesa
 // Verschneidung gefordert und keine Berührung: Programmende und Fehler
   if (key && ret == 3)
   {
-    ret = Mima3->Mia_2Ini_c(0); // Ergebnis ungültig
+    ret = Mima3->Ini2(0); // Ergebnis ungültig
     return 3;
   }
   if(key)
@@ -396,7 +396,7 @@ int sstMath01Mbr2Cls::Mia_2Ber_c( int      key,   // v -> Eingabe-Key = 0 : Gesa
 }
 //-----------------------------------------------------------------------------
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2Les_c( int    key,     // v ->  = 0 : Rückgabe in D: Min X
+int sstMath01Mbr2Cls::Les2( int    key,     // v ->  = 0 : Rückgabe in D: Min X
                                 //       = 1 : Rückgabe in D: Min Y
                                 //       = 3 : Rückgabe in D: Max X
                                 //       = 4 : Rückgabe in D: Max Y
@@ -409,11 +409,11 @@ int sstMath01Mbr2Cls::Mia_2Les_c( int    key,     // v ->  = 0 : Rückgabe in D:
 //.............................................................................
   if ((key < 0) || (key > 8)) return -10;  // Zuklarer Key, Abbruch !!
 //.............................................................................
-  ret = this->Mia_2OK_c(0);
+  ret = this->OK2(0);
   if (ret)
   {                      //...Feld z.T. auáerhalb der Dimensionen
     ret = -1;
-    *D = +dSSTSTR01_UNDEF_DOUBLE;
+    *D = +dSSTSTR01_UNDEF_R8;
     return ret;
   }
 //.............................................................................
@@ -440,13 +440,13 @@ int sstMath01Mbr2Cls::Mia_2Les_c( int    key,     // v ->  = 0 : Rückgabe in D:
       break;
     default:
       ret= -1;
-      *D = +dSSTSTR01_UNDEF_DOUBLE;
+      *D = +dSSTSTR01_UNDEF_R8;
       break;
     }
   return ret;
 }
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2Centr_c ( int      KEY,     // v  -> Vorerst immer 0
+int sstMath01Mbr2Cls::Centr2 ( int      KEY,     // v  -> Vorerst immer 0
                    sstMath01dPnt2Cls  *Pkt)     //   <-> Mittelpunkt
 //.............................................................................
 {
@@ -456,7 +456,7 @@ int sstMath01Mbr2Cls::Mia_2Centr_c ( int      KEY,     // v  -> Vorerst immer 0
   istat = 0;
 
   // MinMax-Feld leer ?
-  istat = this->Mia_2OK_c(0);
+  istat = this->OK2(0);
   if (istat)
   { //.....................Test:   Feld z.T. auáerhalb der Dimensionen
     return -1;
@@ -504,7 +504,7 @@ int sstMath01Mbr2Cls::Mia_2Centr_c ( int      KEY,     // v  -> Vorerst immer 0
 //  return iRet;
 //}
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2Move_XY_c ( int         Key,     // v  -> Vorerst immer 0
+int sstMath01Mbr2Cls::Move_XY2 ( int         Key,     // v  -> Vorerst immer 0
                      double      Dx,      // v  -> Verschiebungswert X
                      double      Dy)      // v  -> Verschiebungswert Y
 //.............................................................................
@@ -529,7 +529,7 @@ int sstMath01Mbr2Cls::Mia_2Move_XY_c ( int         Key,     // v  -> Vorerst imm
   return iRet;
 }
 //=============================================================================
-int sstMath01Mbr2Cls::Mia_2Scal_c ( int      Key,    // v  -> Vorerst immer 0
+int sstMath01Mbr2Cls::Scal2 ( int      Key,    // v  -> Vorerst immer 0
                   double   Scal)
 //.............................................................................
 {
@@ -544,7 +544,7 @@ int sstMath01Mbr2Cls::Mia_2Scal_c ( int      Key,    // v  -> Vorerst immer 0
   // istat = 0;
 
   // Mittelpunkt einer MinMax-Box rechnen
-  iStat = this->Mia_2Centr_c ( 0, &Center);
+  iStat = this->Centr2 ( 0, &Center);
 
   // MinMax-Bereich in Nullpunkt verschieben
   LocMima.XI = this->XI - Center.x;

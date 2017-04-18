@@ -117,7 +117,7 @@ int Test_Mbr (int iKey)
   sTestMiMa.YA = 6.0;
 
   // Box sTestMiMa is fully inside of sClippWin Box
-  iStat = sTestMiMa.Mia_2Box_c(0, &sClippWin);
+  iStat = sTestMiMa.Box2(0, &sClippWin);
   assert(iStat==1);
 
   sstMath01dPnt3Cls Pnt1;
@@ -158,18 +158,18 @@ int Test_Mbr (int iKey)
 //  KoorTrn_stru sTrnDC_WC;
 
   // Min-Max initialisieren.
-  iStat = sWC_MiMa.Mia_2Ini_c ( 0);
+  iStat = sWC_MiMa.Ini2 ( 0);
 
   // Min-Max-Bereich mit D2-Punkt abgleichen.
-  iStat = sWC_MiMa.Mia_2Koor_c ( 0, Pnt1.x, Pnt1.y);
-  iStat = sWC_MiMa.Mia_2Koor_c ( 0, Pnt2.x, Pnt2.y);
+  iStat = sWC_MiMa.Koor2 ( 0, Pnt1.x, Pnt1.y);
+  iStat = sWC_MiMa.Koor2 ( 0, Pnt2.x, Pnt2.y);
 
   // Min-Max abfragen.
-  iStat = sWC_MiMa.Mia_2Les_c ( 6, &Dx);
-  iStat = sWC_MiMa.Mia_2Les_c ( 7, &Dy);
+  iStat = sWC_MiMa.Les2 ( 6, &Dx);
+  iStat = sWC_MiMa.Les2 ( 7, &Dy);
 
-  iStat = sWC_MiMa.Mia_2Les_c ( 0, &MinX);
-  iStat = sWC_MiMa.Mia_2Les_c ( 1, &MinY);
+  iStat = sWC_MiMa.Les2 ( 0, &MinX);
+  iStat = sWC_MiMa.Les2 ( 1, &MinY);
 
   return iRet;
 }

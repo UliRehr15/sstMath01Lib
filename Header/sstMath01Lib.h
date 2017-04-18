@@ -155,10 +155,6 @@ class sstMath01Mbr2Cls
   public:   // Public functions
      sstMath01Mbr2Cls();  // Constructor
 // ----------------------------------------------------------------------------
-     double XI;   /**< Lower, left corner */
-     double YI;   /**< Lower, left corner */
-     double XA;   /**< Upper, right corner */
-     double YA;   /**< Upper, right corner */
 
      //==============================================================================
      /**
@@ -177,7 +173,7 @@ class sstMath01Mbr2Cls
      * @retval   =0 = OK
      * @retval   <0 = allgemeiner Fehler
      */
-     int Mia_2Ini_c ( int    iKey);
+     int Ini2 ( int    iKey);
      //==============================================================================
      /**
      * @brief Min-Max mit einem Punkt initialisieren
@@ -197,7 +193,7 @@ class sstMath01Mbr2Cls
      * @retval   =0 = OK
      * @retval   <0 = allgemeiner Fehler
      */
-     int Mia_2IniPkt_c( int      iKey,   // v  -> Key vorerst immer 0
+     int IniPkt2( int      iKey,   // v  -> Key vorerst immer 0
                         double   X1,     // v  -> x Punkt 1
                         double   Y1);    // v  -> y Punkt 1
      //==============================================================================
@@ -221,7 +217,7 @@ class sstMath01Mbr2Cls
      * @retval   =0 = OK
      * @retval   <0 = allgemeiner Fehler
      */
-     int Mia_2IniLin_c( int      iKey,   // v  -> Key vorerst immer 0
+     int IniLin2( int      iKey,   // v  -> Key vorerst immer 0
                         double   X1,     // v  -> x Punkt 1
                         double   Y1,     // v  -> y Punkt 1
                         double   X2,     // v  -> x Punkt 2
@@ -244,7 +240,7 @@ class sstMath01Mbr2Cls
      * @retval   =0 = OK
      * @retval   <0 = allgemeiner Fehler
      */
-     int Mia_2OK_c ( int      iKey);
+     int OK2 ( int      iKey);
      //==============================================================================
      /**
      * @brief Min-Max mit Koordinaten abgleichen
@@ -264,7 +260,7 @@ class sstMath01Mbr2Cls
      * @retval   =0 = OK
      * @retval   <0 = allgemeiner Fehler
      */
-     int Mia_2Koor_c ( int      iKey,   // Vorerst immer 0
+     int Koor2 ( int      iKey,   // Vorerst immer 0
                        double   X,     // Prüfwert: Punkt-X
                        double   Y);    // Prüfwert: Punkt-Y
      //==============================================================================
@@ -285,7 +281,7 @@ class sstMath01Mbr2Cls
      * @retval   =0 = OK
      * @retval   <0 = allgemeiner Fehler
      */
-     int Mia_2Pkt_c( int         iKey,   // v -> Key vorerst immer 0
+     int Pkt2( int         iKey,   // v -> Key vorerst immer 0
                      sstMath01dPnt2Cls *Pkt);   //   -> Prüfwert: D2-Punkt
 
      //==============================================================================
@@ -310,7 +306,7 @@ class sstMath01Mbr2Cls
      * @retval    -1 : Feld Mima nicht korrekt
      * @retval   -10 : unzulässiger Key <> 0
      */
-     int Mia_2Pruef_c ( int      iKey,   // Vorerst immer 0
+     int Pruef2 ( int      iKey,   // Vorerst immer 0
                         double   X,     // Prüfwert: Punkt-X
                         double   Y);    // Prüfwert: Punkt-Y
 
@@ -337,7 +333,7 @@ class sstMath01Mbr2Cls
      * @retval    -1 : Feld Mima nicht korrekt
      * @retval   -10 : unzulässiger Key <> 0
      */
-     int Mia_2PruefT_c( int    iKey,    // v  -> Key vorerst immmer 0
+     int PruefT2( int    iKey,    // v  -> Key vorerst immmer 0
                         double   X,      // v  -> Prüfwert: Punkt-X
                         double   Y,      // v  -> Prüfwert: Punkt-Y
                         double   Tol);    // v  -> Toleranzwert
@@ -358,7 +354,7 @@ class sstMath01Mbr2Cls
      * @retval   =0: Keine Überdeckung oder Berührung
      * @retval   <0: allgemeiner Fehler
      */
-     int Mia_2Box_c ( int      iKey,    // v -> vorerst immer null
+     int Box2 ( int      iKey,    // v -> vorerst immer null
                       sstMath01Mbr2Cls *Mima2); //   -> Min-Max-Werte : Eingabebereich 2
      //==============================================================================
      /**
@@ -380,7 +376,7 @@ class sstMath01Mbr2Cls
      * @retval   =0 = OK
      * @retval   <0 = allgemeiner Fehler
      */
-     int Mia_2Ber_c ( int      iKey,     // 0 oder 1
+     int Ber2 ( int      iKey,     // 0 oder 1
                       sstMath01Mbr2Cls *Mima2,   // Min-Max-Werte : Eingabebereich 2
                       sstMath01Mbr2Cls *Mima3);  // Min-Max-Werte : Rückgabebereich
      //==============================================================================
@@ -406,7 +402,7 @@ class sstMath01Mbr2Cls
      * @retval   =0 = OK
      * @retval   <0 = allgemeiner Fehler
      */
-     int Mia_2Les_c ( int      iKey,   // 0 bis 7
+     int Les2 ( int      iKey,   // 0 bis 7
                       double  *D);     // Ergebnis D
      //==============================================================================
      /**
@@ -426,7 +422,7 @@ class sstMath01Mbr2Cls
      * @retval   =0 = OK
      * @retval   <0 = allgemeiner Fehler
      */
-     int Mia_2Centr_c ( int      iKey,     // v  -> Vorerst immer 0
+     int Centr2 ( int      iKey,     // v  -> Vorerst immer 0
                         sstMath01dPnt2Cls  *Pkt);    //   <-> Mittelpunkt
      //==============================================================================
      /**
@@ -447,7 +443,7 @@ class sstMath01Mbr2Cls
      * @retval   =0 = OK
      * @retval   <0 = allgemeiner Fehler
      */
-     int Mia_2Move_XY_c ( int         iKey,     // v  -> Vorerst immer 0
+     int Move_XY2 ( int         iKey,     // v  -> Vorerst immer 0
                           double      Dx,      // v  -> Verschiebungswert X
                           double      Dy);     // v  -> Verschiebungswert Y
      //==============================================================================
@@ -471,11 +467,16 @@ class sstMath01Mbr2Cls
      * @retval   -2 = Skalierungswert zu klein
      * @retval   <0 = Allgemeiner Fehler
      */
-     int Mia_2Scal_c ( int      iKey,     // v  -> Vorerst immer 0
+     int Scal2 ( int      iKey,     // v  -> Vorerst immer 0
                        double   dScal);
      //==============================================================================
 
-  private:  // Private functions
+     double XI;   /**< Lower, left corner */
+     double YI;   /**< Lower, left corner */
+     double XA;   /**< Upper, right corner */
+     double YA;   /**< Upper, right corner */
+
+private:  // Private functions
 };
 /**
 * @brief 4D transformation matrix
