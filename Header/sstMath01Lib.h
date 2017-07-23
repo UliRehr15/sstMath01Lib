@@ -470,42 +470,13 @@ class sstMath01Mbr2Cls
      int Scal2 ( int      iKey,     // v  -> Vorerst immer 0
                        double   dScal);
      //==============================================================================
-     /**
-     * @brief Get XI
-     *
-     * @return double XI
-     */
-     double getXI() const;
-     //==============================================================================
-     /**
-     * @brief Get YI
-     *
-     * @return double YI
-     */
-     double getYI() const;
-     //==============================================================================
-     /**
-     * @brief Get XA
-     *
-     * @return double XA
-     */
-     double getXA() const;
-     //==============================================================================
-     /**
-     * @brief Get YA
-     *
-     * @return double YA
-     */
-     double getYA() const;
-     //==============================================================================
 
-
-
-private:  // Private functions
      double XI;   /**< Lower, left corner */
      double YI;   /**< Lower, left corner */
      double XA;   /**< Upper, right corner */
      double YA;   /**< Upper, right corner */
+
+private:  // Private functions
 };
 /**
 * @brief 4D transformation matrix

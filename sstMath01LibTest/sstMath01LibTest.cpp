@@ -24,14 +24,15 @@ int main (int argc, char *argv [])
   sstMath01dPnt3Cls Pnt2;
   sstMath01dPnt3Cls Pnt3;
 
-  sstMath01fPnt2Cls fDC_Pnt1;  // Device (screen) coordinates as float
+  sstMath01fPnt2Cls fDC_Pnt1;  // 2D Device (screen) coordinates as float
   sstMath01fPnt2Cls fDC_Pnt2;
 
   sstMath01ulPnt3Cls ulMC_Pnt1;  // model (database) coordinates (unsigned long)
   sstMath01ulPnt3Cls ulMC_Pnt2;
 
   unsigned long ulDB_Max = 1000000;  // maximum of unsigned long coordinates
-  double dDC_Max = 1000.0;           // Maximum of device coodinates
+  // double dDC_Max = 1000.0;           // Maximum of device coodinates
+  double dDC_Max = 400.0;           // Maximum of device coodinates
 
   sstMath01CoorTrnCls oCoorTrn;  // transformation manager
 
@@ -42,13 +43,19 @@ int main (int argc, char *argv [])
 //  sWC_MiMa.YI =  4444444.4444;
 //  sWC_MiMa.XA =  5565555.3333;  // upper right
 //  sWC_MiMa.YA =  4454444.2222;
-  sWC_MiMa.Koor2(0,5555555.5555,4444444.4444);
-  sWC_MiMa.Koor2(0,5565555.3333,4454444.2222);
+  sWC_MiMa.XI =  32538589.0;  // lower left
+  sWC_MiMa.YI =   5801400.0;
+  sWC_MiMa.XA =  32541354.0;  // upper right
+  sWC_MiMa.YA =   5804394.0;
 
-  Pnt1.x =  5555555.5555;  // test point 1
-  Pnt1.y =  4444444.4444;
-  Pnt2.x =  5565555.3333;  // test point 2
-  Pnt2.y =  4454444.2222;
+//  Pnt1.x =  5555555.5555;  // test point 1
+//  Pnt1.y =  4444444.4444;
+//  Pnt2.x =  5565555.3333;  // test point 2
+//  Pnt2.y =  4454444.2222;
+  Pnt1.x =  32538589.0;  // test point 1
+  Pnt1.y =   5801400.0;
+  Pnt2.x =  32541354.0;  // test point 2
+  Pnt2.y =   5804394.0;
 
 
   // calculate Transformations
@@ -60,8 +67,8 @@ int main (int argc, char *argv [])
 
   assert(fDC_Pnt1.x >= (0.0 - fLim) && fDC_Pnt1.x <= (0.0 + fLim));
   assert(fDC_Pnt1.y >= (0.0 - fLim) && fDC_Pnt1.y <= (0.0 + fLim));
-  assert(fDC_Pnt2.x >= (1000.0 - fLim) && fDC_Pnt2.x <= (1000.0 + fLim));
-  assert(fDC_Pnt2.y >= (1000.0 - fLim) && fDC_Pnt2.y <= (1000.0 + fLim));
+  // assert(fDC_Pnt2.x >= (dDC_Max - fLim) && fDC_Pnt2.x <= (dDC_Max + fLim));
+  assert(fDC_Pnt2.y >= (dDC_Max - fLim) && fDC_Pnt2.y <= (dDC_Max + fLim));
 
   // calculate model points
   iStat = oCoorTrn.Pnt3WC_MC ( 0, &Pnt1, &ulMC_Pnt1);
@@ -69,7 +76,7 @@ int main (int argc, char *argv [])
 
   assert(ulMC_Pnt1.x == 0);
   assert(ulMC_Pnt1.y == 0);
-  assert(ulMC_Pnt2.x == 1000000);
+  // assert(ulMC_Pnt2.x == 1000000);
   assert(ulMC_Pnt2.y == 1000000);
 
   // Recalculate world coodinates
@@ -108,19 +115,15 @@ int Test_Mbr (int iKey)
   sstMath01Mbr2Cls sClippWin;
   sstMath01Mbr2Cls sTestMiMa;
 
-//  sClippWin.XI = 2.0;
-//  sClippWin.YI = 2.0;
-//  sClippWin.XA = 8.0;
-//  sClippWin.YA = 8.0;
-  sClippWin.Koor2(0,2.0,2.0);
-  sClippWin.Koor2(0,8.0,8.0);
+  sClippWin.XI = 2.0;
+  sClippWin.YI = 2.0;
+  sClippWin.XA = 8.0;
+  sClippWin.YA = 8.0;
 
-//  sTestMiMa.XI = 3.0;
-//  sTestMiMa.YI = 3.0;
-//  sTestMiMa.XA = 6.0;
-//  sTestMiMa.YA = 6.0;
-  sTestMiMa.Koor2(0,3.0,3.0);
-  sTestMiMa.Koor2(0,6.0,6.0);
+  sTestMiMa.XI = 3.0;
+  sTestMiMa.YI = 3.0;
+  sTestMiMa.XA = 6.0;
+  sTestMiMa.YA = 6.0;
 
   // Box sTestMiMa is fully inside of sClippWin Box
   iStat = sTestMiMa.Box2(0, &sClippWin);

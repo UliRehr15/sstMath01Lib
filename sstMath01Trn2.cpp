@@ -40,8 +40,7 @@ int sstMath01CoorTrnCls::Calc_WC_VRC ( int           Key,
   if (Key != 0) return -1;
 
   // In WC_VRC-Transformation Verschiebungswerte setzen
-  // iStat = TrnWC_VRC->SetMov( 0,  (-WC_Mima->XI), (-WC_Mima->YI),  0.0);
-  iStat = TrnWC_VRC->SetMov( 0,  (-WC_Mima->getXI()), (-WC_Mima->getYI()),  0.0);
+  iStat = TrnWC_VRC->SetMov( 0,  (-WC_Mima->XI), (-WC_Mima->YI),  0.0);
 
   return iStat;
 }
@@ -57,10 +56,8 @@ int sstMath01CoorTrnCls::Calc_VRC_NPC ( int         Key,
 //.............................................................................
   if (Key != 0) return -1;
 
-//  dx = WC_Mima->XA - WC_Mima->XI;  /* Ausdehnung X der Datenbank */
-//  dy = WC_Mima->YA - WC_Mima->YI;  /* Ausdehnung Y der Datenbank */
-  iStat = WC_Mima->Les2(6,&dx);  /* Ausdehnung X der Datenbank */
-  iStat = WC_Mima->Les2(7,&dy);  /* Ausdehnung Y der Datenbank */
+  dx = WC_Mima->XA - WC_Mima->XI;  /* Ausdehnung X der Datenbank */
+  dy = WC_Mima->YA - WC_Mima->YI;  /* Ausdehnung Y der Datenbank */
 
   dx = 1 / dx; dy = 1 / dy;
   dd = fmin(dx,dy);        /* Gráere Ausdehnung whlen */
@@ -143,10 +140,8 @@ int sstMath01CoorTrnCls::Calc_NPC_DC ( int           iKey,
 //.............................................................................
   if (iKey < 0 || iKey > 1) return -1;
 
-  // dx = ScrMima->XA - ScrMima->XI;  /* Ausdehnung X der Datenbank */
-  // dy = ScrMima->YA - ScrMima->YI;  /* Ausdehnung Y der Datenbank */
-  iStat = ScrMima->Les2(6,&dx);  /* Ausdehnung X der Datenbank */
-  iStat = ScrMima->Les2(7,&dy);  /* Ausdehnung Y der Datenbank */
+  dx = ScrMima->XA - ScrMima->XI;  /* Ausdehnung X der Datenbank */
+  dy = ScrMima->YA - ScrMima->YI;  /* Ausdehnung Y der Datenbank */
 
   dd = fmin(dx,dy);        /* Größere Ausdehnung wählen */
 
@@ -160,8 +155,7 @@ int sstMath01CoorTrnCls::Calc_NPC_DC ( int           iKey,
 
     // Da das Koordinatensystem auf dem Kopf steht, liegt der Nullpunkt nicht bei
     // 0/0, sondern bei 0/-dd. Das muß bei der Verschiebung berücksichtigt werden.
-    // iStat = TrnNPC_DC->SetMov( 0,  ScrMima->XI, (ScrMima->YI + dd),  0.0);
-    iStat = TrnNPC_DC->SetMov( 0,  ScrMima->getXI(), (ScrMima->getYI() + dd),  0.0);
+    iStat = TrnNPC_DC->SetMov( 0,  ScrMima->XI, (ScrMima->YI + dd),  0.0);
 
   }
   else
@@ -253,9 +247,12 @@ int sstMath01CoorTrnCls::Calc_All ( int               iKey,
 //.............................................................................
   if (iKey < 0 || iKey > 1) return -1;
 
-  iStat = this->Calc_WC_DC ( 1, WC_Mima, ulDB_Max, dDC_Max);
-  iStat = this->Calc_WC_MC ( 0, &WC_Mima, ulDB_Max);
-  iStat = this->Calc_MC_DC ( 1, ulDB_Max, dDC_Max);
+//  iStat = this->Calc_WC_DC ( 1, WC_Mima, ulDB_Max, dDC_Max);
+//  iStat = this->Calc_WC_MC ( 0, &WC_Mima, ulDB_Max);
+//  iStat = this->Calc_MC_DC ( 1, ulDB_Max, dDC_Max);
+  iStat = this->Calc_WC_DC ( iKey, WC_Mima, ulDB_Max, dDC_Max);
+  iStat = this->Calc_WC_MC ( iKey, &WC_Mima, ulDB_Max);
+  iStat = this->Calc_MC_DC ( iKey, ulDB_Max, dDC_Max);
 
   return iStat;
 }

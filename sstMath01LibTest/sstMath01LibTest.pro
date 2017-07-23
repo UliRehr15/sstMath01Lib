@@ -26,3 +26,6 @@ HEADERS    += sstMath01LibTest.h
 SOURCES    += sstMath01LibTest.cpp
 
 TARGET	  	= sstMath01LibTest
+
+# copy to deployment directory
+# DESTDIR     = ../../../../local_deploy
