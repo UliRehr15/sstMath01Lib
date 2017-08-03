@@ -43,10 +43,12 @@ int main (int argc, char *argv [])
 //  sWC_MiMa.YI =  4444444.4444;
 //  sWC_MiMa.XA =  5565555.3333;  // upper right
 //  sWC_MiMa.YA =  4454444.2222;
-  sWC_MiMa.XI =  32538589.0;  // lower left
-  sWC_MiMa.YI =   5801400.0;
-  sWC_MiMa.XA =  32541354.0;  // upper right
-  sWC_MiMa.YA =   5804394.0;
+//  sWC_MiMa.XI =  32538589.0;  // lower left
+//  sWC_MiMa.YI =   5801400.0;
+//  sWC_MiMa.XA =  32541354.0;  // upper right
+//  sWC_MiMa.YA =   5804394.0;
+  sWC_MiMa.Koor2(0,32538589.0,5801400.0);
+  sWC_MiMa.Koor2(0,32541354.0,5804394.0);
 
 //  Pnt1.x =  5555555.5555;  // test point 1
 //  Pnt1.y =  4444444.4444;
@@ -115,15 +117,19 @@ int Test_Mbr (int iKey)
   sstMath01Mbr2Cls sClippWin;
   sstMath01Mbr2Cls sTestMiMa;
 
-  sClippWin.XI = 2.0;
-  sClippWin.YI = 2.0;
-  sClippWin.XA = 8.0;
-  sClippWin.YA = 8.0;
+//  sClippWin.XI = 2.0;
+//  sClippWin.YI = 2.0;
+//  sClippWin.XA = 8.0;
+//  sClippWin.YA = 8.0;
+  sClippWin.Koor2(0,2.0,2.0);
+  sClippWin.Koor2(0,8.0,8.0);
 
-  sTestMiMa.XI = 3.0;
-  sTestMiMa.YI = 3.0;
-  sTestMiMa.XA = 6.0;
-  sTestMiMa.YA = 6.0;
+//  sTestMiMa.XI = 3.0;
+//  sTestMiMa.YI = 3.0;
+//  sTestMiMa.XA = 6.0;
+//  sTestMiMa.YA = 6.0;
+  sTestMiMa.Koor2(0,3.0,3.0);
+  sTestMiMa.Koor2(0,6.0,6.0);
 
   // Box sTestMiMa is fully inside of sClippWin Box
   iStat = sTestMiMa.Box2(0, &sClippWin);

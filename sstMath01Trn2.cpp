@@ -40,7 +40,8 @@ int sstMath01CoorTrnCls::Calc_WC_VRC ( int           Key,
   if (Key != 0) return -1;
 
   // In WC_VRC-Transformation Verschiebungswerte setzen
-  iStat = TrnWC_VRC->SetMov( 0,  (-WC_Mima->XI), (-WC_Mima->YI),  0.0);
+  // iStat = TrnWC_VRC->SetMov( 0,  (-WC_Mima->XI), (-WC_Mima->YI),  0.0);
+  iStat = TrnWC_VRC->SetMov( 0,  (-WC_Mima->getXI()), (-WC_Mima->getYI()),  0.0);
 
   return iStat;
 }
@@ -56,8 +57,8 @@ int sstMath01CoorTrnCls::Calc_VRC_NPC ( int         Key,
 //.............................................................................
   if (Key != 0) return -1;
 
-  dx = WC_Mima->XA - WC_Mima->XI;  /* Ausdehnung X der Datenbank */
-  dy = WC_Mima->YA - WC_Mima->YI;  /* Ausdehnung Y der Datenbank */
+  dx = WC_Mima->getXA() - WC_Mima->getXI();  /* Ausdehnung X der Datenbank */
+  dy = WC_Mima->getYA() - WC_Mima->getYI();  /* Ausdehnung Y der Datenbank */
 
   dx = 1 / dx; dy = 1 / dy;
   dd = fmin(dx,dy);        /* Gráere Ausdehnung whlen */
@@ -140,8 +141,8 @@ int sstMath01CoorTrnCls::Calc_NPC_DC ( int           iKey,
 //.............................................................................
   if (iKey < 0 || iKey > 1) return -1;
 
-  dx = ScrMima->XA - ScrMima->XI;  /* Ausdehnung X der Datenbank */
-  dy = ScrMima->YA - ScrMima->YI;  /* Ausdehnung Y der Datenbank */
+  dx = ScrMima->getXA() - ScrMima->getXI();  /* Ausdehnung X der Datenbank */
+  dy = ScrMima->getYA() - ScrMima->getYI();  /* Ausdehnung Y der Datenbank */
 
   dd = fmin(dx,dy);        /* Größere Ausdehnung wählen */
 
@@ -155,7 +156,7 @@ int sstMath01CoorTrnCls::Calc_NPC_DC ( int           iKey,
 
     // Da das Koordinatensystem auf dem Kopf steht, liegt der Nullpunkt nicht bei
     // 0/0, sondern bei 0/-dd. Das muß bei der Verschiebung berücksichtigt werden.
-    iStat = TrnNPC_DC->SetMov( 0,  ScrMima->XI, (ScrMima->YI + dd),  0.0);
+    iStat = TrnNPC_DC->SetMov( 0,  ScrMima->getXI(), (ScrMima->getYI() + dd),  0.0);
 
   }
   else

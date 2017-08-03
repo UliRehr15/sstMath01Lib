@@ -23,3 +23,23 @@
 
 #include "sstMath01LibInt.h"
 
+
+double sstMath01Mbr2Cls::getXI() const
+{
+    return XI;
+}
+
+double sstMath01Mbr2Cls::getYI() const
+{
+    return YI;
+}
+
+double sstMath01Mbr2Cls::getXA() const
+{
+    return XA;
+}
+
+double sstMath01Mbr2Cls::getYA() const
+{
+    return YA;
+}

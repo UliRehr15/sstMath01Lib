@@ -23,3 +23,4 @@ Structure of coding projects should be:
 20170418: Version 1.2: Rework interface of Mbr Class.  <BR>
 20170628: Version 1.3: Mbr Values now private, more Getter functions. <BR>
 20170723: Version 1.4: Small corrections. <BR>
+20170803: Version 1.5: Member of Mbr now private. <BR>

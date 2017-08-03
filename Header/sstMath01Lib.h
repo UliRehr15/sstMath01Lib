@@ -467,16 +467,51 @@ class sstMath01Mbr2Cls
      * @retval   -2 = Skalierungswert zu klein
      * @retval   <0 = Allgemeiner Fehler
      */
-     int Scal2 ( int      iKey,     // v  -> Vorerst immer 0
-                       double   dScal);
+     int Scal2 ( int      iKey,
+                 double   dScal);
+     //==============================================================================
+     /**
+     * @brief // Get Value <BR>
+     * iStat = oMbr.GetValue.getValue(dVal);
+     *
+     * @return double value
+     */
+     // ----------------------------------------------------------------------------
+     double getXI() const;
+     //==============================================================================
+     /**
+     * @brief // Get Value <BR>
+     * iStat = oMbr.GetValue.getValue(dVal);
+     *
+     * @return double value
+     */
+     // ----------------------------------------------------------------------------
+     double getYI() const;
+     //==============================================================================
+     /**
+     * @brief // Get Value <BR>
+     * iStat = oMbr.GetValue.getValue(dVal);
+     *
+     * @return double value
+     */
+     // ----------------------------------------------------------------------------
+     double getXA() const;
+     //==============================================================================
+     /**
+     * @brief // Get Value <BR>
+     * iStat = oMbr.GetValue.getValue(dVal);
+     *
+     * @return double value
+     */
+     // ----------------------------------------------------------------------------
+     double getYA() const;
      //==============================================================================
 
+private:  // Private functions
      double XI;   /**< Lower, left corner */
      double YI;   /**< Lower, left corner */
      double XA;   /**< Upper, right corner */
      double YA;   /**< Upper, right corner */
-
-private:  // Private functions
 };
 /**
 * @brief 4D transformation matrix
