@@ -19,11 +19,13 @@
 #include <string.h>
 #include <assert.h>
 
+#include <string>
+
+#include <sstStr01Lib.h>
+
 #include "sstMath01Lib.h"
 
 #include "sstMath01LibInt.h"
-
-
 
 sstMath01dPnt2Cls::sstMath01dPnt2Cls()
 {

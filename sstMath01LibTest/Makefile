@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = 
 CFLAGS        = -pipe -g -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I. -I../Header -I/usr/lib/i386-linux-gnu/qt5/mkspecs/linux-g++
+INCPATH       = -I. -I../../sst_str01_lib/Header -I../Header -I/usr/lib/i386-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/i386-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = sstMath01LibTest1.0.0
 DISTDIR = /home/uli-le/Entwicklung/sstMath01Lib/sstMath01LibTest/.tmp/sstMath01LibTest1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) ../../libs/libsstMath01Lib_d.a 
+LIBS          = $(SUBLIBS) ../../libs/libsstMath01Lib_d.a ../../libs/libsst_str01_lib_d.a 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -277,7 +277,8 @@ compiler_clean:
 
 ####### Compile
 
-sstMath01LibTest.o: sstMath01LibTest.cpp ../Header/sstMath01Lib.h \
+sstMath01LibTest.o: sstMath01LibTest.cpp ../../sst_str01_lib/Header/sstStr01Lib.h \
+		../Header/sstMath01Lib.h \
 		sstMath01LibTest.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMath01LibTest.o sstMath01LibTest.cpp
 

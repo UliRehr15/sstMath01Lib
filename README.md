@@ -16,6 +16,7 @@ Structure of coding projects should be:
 
 .. [libs]
    [Doxygen_output] <BR>
+   [sst_str01_lib] <BR>
 
 
 20170107: Version 1.0: First Check In. <BR>
@@ -24,3 +25,5 @@ Structure of coding projects should be:
 20170628: Version 1.3: Mbr Values now private, more Getter functions. <BR>
 20170723: Version 1.4: Small corrections. <BR>
 20170803: Version 1.5: Member of Mbr now private. <BR>
+20180215: Version 1.6: Class Mbr: New function Mbr to csv string. <BR>
+                       Lib sstMath01Lib needs now Lib sst_str01_lib. <BR>

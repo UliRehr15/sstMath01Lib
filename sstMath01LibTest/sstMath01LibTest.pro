@@ -6,10 +6,12 @@ CONFIG       -= windows
 # CONFIG       -= debug  # RELEASE ist aktiv
 CONFIG       -= release  # DEBUG ist aktiv
 
+INCLUDEPATH += ../../sst_str01_lib/Header
 INCLUDEPATH += ../Header
 
 debug{
   LIBS        += ../../libs/libsstMath01Lib_d.a
+  LIBS        += ../../libs/libsst_str01_lib_d.a
 }
 release{
   
@@ -19,6 +21,7 @@ release{
   win32-g++:QMAKE_CXXFLAGS_EXCEPTIONS_ON -= -mthreads
   
   LIBS        += ../../libs/libsstMath01Lib_r.a
+  LIBS        += ../../libs/libsst_str01_lib_r.a
 }
 
 HEADERS    += sstMath01LibTest.h

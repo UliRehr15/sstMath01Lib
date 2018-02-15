@@ -506,6 +506,15 @@ class sstMath01Mbr2Cls
      // ----------------------------------------------------------------------------
      double getYA() const;
      //==============================================================================
+     /**
+     * @brief // Get MBR as csv string (XI;YI;XA;YA) <BR>
+     * oMBR_Str = oMbr.toString();
+     *
+     * @return string value
+     */
+     // ----------------------------------------------------------------------------
+     std::string toString() const;
+     //==============================================================================
 
 private:  // Private functions
      double XI;   /**< Lower, left corner */

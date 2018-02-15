@@ -7,7 +7,9 @@
 #include <string.h>
 #include <assert.h>
 
+#include <string>
 
+#include <sstStr01Lib.h>
 #include <sstMath01Lib.h>
 
 #include "sstMath01LibTest.h"
@@ -39,21 +41,9 @@ int main (int argc, char *argv [])
   float fLim = 0.001;
 
   sstMath01Mbr2Cls sWC_MiMa;  // Boundings for world coordinates
-//  sWC_MiMa.XI =  5555555.5555;  // lower left
-//  sWC_MiMa.YI =  4444444.4444;
-//  sWC_MiMa.XA =  5565555.3333;  // upper right
-//  sWC_MiMa.YA =  4454444.2222;
-//  sWC_MiMa.XI =  32538589.0;  // lower left
-//  sWC_MiMa.YI =   5801400.0;
-//  sWC_MiMa.XA =  32541354.0;  // upper right
-//  sWC_MiMa.YA =   5804394.0;
   sWC_MiMa.Koor2(0,32538589.0,5801400.0);
   sWC_MiMa.Koor2(0,32541354.0,5804394.0);
 
-//  Pnt1.x =  5555555.5555;  // test point 1
-//  Pnt1.y =  4444444.4444;
-//  Pnt2.x =  5565555.3333;  // test point 2
-//  Pnt2.y =  4454444.2222;
   Pnt1.x =  32538589.0;  // test point 1
   Pnt1.y =   5801400.0;
   Pnt2.x =  32541354.0;  // test point 2
@@ -114,30 +104,25 @@ int Test_Mbr (int iKey)
   int iRet  = 0;
   int iStat = 0;
 
-  sstMath01Mbr2Cls sClippWin;
-  sstMath01Mbr2Cls sTestMiMa;
+  sstMath01Mbr2Cls oClippWin;
+  sstMath01Mbr2Cls oTestMiMa;
 
-//  sClippWin.XI = 2.0;
-//  sClippWin.YI = 2.0;
-//  sClippWin.XA = 8.0;
-//  sClippWin.YA = 8.0;
-  sClippWin.Koor2(0,2.0,2.0);
-  sClippWin.Koor2(0,8.0,8.0);
+  oClippWin.Koor2(0,2.0,2.0);
+  oClippWin.Koor2(0,8.0,8.0);
 
-//  sTestMiMa.XI = 3.0;
-//  sTestMiMa.YI = 3.0;
-//  sTestMiMa.XA = 6.0;
-//  sTestMiMa.YA = 6.0;
-  sTestMiMa.Koor2(0,3.0,3.0);
-  sTestMiMa.Koor2(0,6.0,6.0);
+  oTestMiMa.Koor2(0,3.0,3.0);
+  oTestMiMa.Koor2(0,6.0,6.0);
 
-  // Box sTestMiMa is fully inside of sClippWin Box
-  iStat = sTestMiMa.Box2(0, &sClippWin);
+  // MBR sTestMiMa is fully inside of sClippWin MBR
+  iStat = oTestMiMa.Box2(0, &oClippWin);
   assert(iStat==1);
+
+  // Get MBR as csv string (XI;YI;XA;YA)
+  std::string oMimaStr = oTestMiMa.toString();
+  assert(oMimaStr == "3.00;3.00;6.00;6.00");
 
   sstMath01dPnt3Cls Pnt1;
   sstMath01dPnt3Cls Pnt2;
-  sstMath01dPnt3Cls Pnt3;
 
   double Dx = 0.0;
   double Dy = 0.0;
@@ -151,26 +136,11 @@ int Test_Mbr (int iKey)
   Pnt1.y =  4444444.4444;
   Pnt2.x =  5565555.3333;
   Pnt2.y =  4454444.2222;
-  //  Pnt1.x =  10.0;
-  //  Pnt1.y =  10.0;
-  //  Pnt2.x =  11.0;
-  //  Pnt2.y =  11.0;
 
   Pnt1.z =  0.0;
   Pnt2.z =  0.0;
 
   sstMath01Mbr2Cls sWC_MiMa;  // Boundings for word coordinates
-  // sstMath01Mbr2Cls sScrMiMa;
-
-  //  sScrMiMa.XI = 0.0;
-  //  sScrMiMa.YI = 0.0;
-  //  sScrMiMa.XA = 10000.0;
-  //  sScrMiMa.YA = 10000.0;
-
-//  KoorTrn_stru sTrnWC_DC;
-//  KoorTrn_stru sTrnWC_MC;
-//  KoorTrn_stru sTrnMC_DC;
-//  KoorTrn_stru sTrnDC_WC;
 
   // Min-Max initialisieren.
   iStat = sWC_MiMa.Ini2 ( 0);
