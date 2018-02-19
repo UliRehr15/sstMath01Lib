@@ -27,3 +27,4 @@ Structure of coding projects should be:
 20170803: Version 1.5: Member of Mbr now private. <BR>
 20180215: Version 1.6: Class Mbr: New function Mbr to csv string. <BR>
                        Lib sstMath01Lib needs now Lib sst_str01_lib. <BR>
+20180219: Version 1.7: Class CoorTrn: New functions Transform_WC_DC, Transform_DC_WC. <BR>

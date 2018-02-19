@@ -294,19 +294,23 @@ compiler_clean:
 
 ####### Compile
 
-sstMath01Lib.o: sstMath01Lib.cpp Header/sstMath01Lib.h \
+sstMath01Lib.o: sstMath01Lib.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
+		Header/sstMath01Lib.h \
 		sstMath01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMath01Lib.o sstMath01Lib.cpp
 
-sstMath01Pnt1.o: sstMath01Pnt1.cpp Header/sstMath01Lib.h \
+sstMath01Pnt1.o: sstMath01Pnt1.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
+		Header/sstMath01Lib.h \
 		sstMath01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMath01Pnt1.o sstMath01Pnt1.cpp
 
-sstMath01Trn1.o: sstMath01Trn1.cpp Header/sstMath01Lib.h \
+sstMath01Trn1.o: sstMath01Trn1.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
+		Header/sstMath01Lib.h \
 		sstMath01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMath01Trn1.o sstMath01Trn1.cpp
 
-sstMath01Trn2.o: sstMath01Trn2.cpp Header/sstMath01Lib.h \
+sstMath01Trn2.o: sstMath01Trn2.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
+		Header/sstMath01Lib.h \
 		sstMath01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMath01Trn2.o sstMath01Trn2.cpp
 

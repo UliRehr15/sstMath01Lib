@@ -957,6 +957,41 @@ class sstMath01CoorTrnCls
                           sstMath01Mbr2Cls      WC_Mima,
                           unsigned long ulDB_Max,
                           double            dDC_Max);
+     //==============================================================================
+     /**
+     * @brief // transform coordinates from world to device (screen)  coordinate system  <BR>
+     * iStat = oCoorTrn.Transform_WC_DC(iKey, &dX, &dY);
+     *
+     * @param iKey  [in] For the moment 0
+     * @param dX    [in out] X Value
+     * @param dY    [in out] Y Value
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int Transform_WC_DC (int iKey, double *dX, double *dY);
+     //==============================================================================
+     /**
+     * @brief // transform coordinates from device (screen)  to world coordinate system  <BR>
+     * iStat = oCoorTrn.Transform_DC_WC(iKey, &dX, &dY);
+     *
+     * @param iKey  [in] For the moment 0
+     * @param dX    [in out] X Value
+     * @param dY    [in out] Y Value
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int Transform_DC_WC (int iKey, double *dX, double *dY);
+     //==============================================================================
+
+
   private:  // Private functions
 
      //=============================================================================

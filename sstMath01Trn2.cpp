@@ -414,3 +414,61 @@ int sstMath01CoorTrnCls::Pnt3DC_WC3 ( int             iKey,
   return iStat;
 }
 //=============================================================================
+//=============================================================================
+int sstMath01CoorTrnCls::Transform_WC_DC (int iKey, double *dX, double *dY)
+//-----------------------------------------------------------------------------
+{
+  sstMath01fPnt2Cls fDC_Pnt;  // 2D Device (screen) coordinates as float
+  sstMath01dPnt3Cls dWC_Pnt;  // 3D World coordinates as double
+
+  int iRet  = 0;
+  int iStat = 0;
+  //-----------------------------------------------------------------------------
+  if ( iKey != 0) return -1;
+
+  dWC_Pnt.x = *dX;
+  dWC_Pnt.y = *dY;
+
+  this->Pnt3WC_DC2(0,&dWC_Pnt,&fDC_Pnt);
+
+  *dX = fDC_Pnt.x;
+  *dY = fDC_Pnt.y;
+
+  // Fatal Errors goes to an assert
+  assert(iRet >= 0);
+
+  // Small Errors will given back
+  iRet = iStat;
+
+  return iRet;
+}
+//=============================================================================
+int sstMath01CoorTrnCls::Transform_DC_WC (int iKey, double *dX, double *dY)
+//-----------------------------------------------------------------------------
+{
+  sstMath01fPnt2Cls fDC_Pnt;  // 2D Device (screen) coordinates as float
+  sstMath01dPnt3Cls dWC_Pnt;  // 3D World coordinates as double
+
+  int iRet  = 0;
+  int iStat = 0;
+  //-----------------------------------------------------------------------------
+  if ( iKey != 0) return -1;
+
+  fDC_Pnt.x = (float) *dX;
+  fDC_Pnt.y = (float) *dY;
+
+  this->Pnt3DC_WC2(0,&fDC_Pnt, &dWC_Pnt);
+
+  *dX = dWC_Pnt.x;
+  *dY = dWC_Pnt.y;
+
+  // Fatal Errors goes to an assert
+  assert(iRet >= 0);
+
+  // Small Errors will given back
+  iRet = iStat;
+
+  return iRet;
+}
+//=============================================================================
+
