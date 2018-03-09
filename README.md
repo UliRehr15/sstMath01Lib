@@ -28,3 +28,4 @@ Structure of coding projects should be:
 20180215: Version 1.6: Class Mbr: New function Mbr to csv string. <BR>
                        Lib sstMath01Lib needs now Lib sst_str01_lib. <BR>
 20180219: Version 1.7: Class CoorTrn: New functions Transform_WC_DC, Transform_DC_WC. <BR>
+20180309: Version 1.8: A lot of functions of D2Pnt and D3Pnt, most still in german. <BR>

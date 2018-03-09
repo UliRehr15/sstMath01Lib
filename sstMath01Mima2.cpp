@@ -468,49 +468,12 @@ int sstMath01Mbr2Cls::Centr2 ( int      KEY,     // v  -> Vorerst immer 0
   return istat;
 }
 //=============================================================================
-//int Mia_2DrehBox_c ( int       Key,     // v  -> Vorerst immer 0
-//                     sstMath01Mbr2Cls    *Mima,    //   <-> Min-Max-Werte
-//                     double      Wnk,     // v  -> Drehwinkel (Rad)
-//                     D2Box_stru *Box)     //   <-  Berechnetes D2-Viereck
-////.............................................................................
-//{
-//  double Wnk_co;
-//  double Wnk_si;
-
-//  int iRet;
-//  // Cint2 iStat;
-////.............................................................................
-//  if (Key != 0) return -1;
-//  iRet = 0;
-//  // iStat = 0;
-
-//  Wnk_co = cos ( Wnk);
-//  Wnk_si = sin ( Wnk);
-
-//  // lokale gedrehte MinMax-Box rechnen
-//  Box->Pkt[0].x =  Mima->XI * Wnk_co - Mima->YI * Wnk_si;
-//  Box->Pkt[0].y =  Mima->XI * Wnk_si + Mima->YI * Wnk_co;
-//  Box->Pkt[1].x =  Mima->XA * Wnk_co - Mima->YI * Wnk_si;
-//  Box->Pkt[1].y =  Mima->XA * Wnk_si + Mima->YI * Wnk_co;
-//  Box->Pkt[2].x =  Mima->XA * Wnk_co - Mima->YA * Wnk_si;
-//  Box->Pkt[2].y =  Mima->XA * Wnk_si + Mima->YA * Wnk_co;
-//  Box->Pkt[3].x =  Mima->XI * Wnk_co - Mima->YA * Wnk_si;
-//  Box->Pkt[3].y =  Mima->XI * Wnk_si + Mima->YA * Wnk_co;
-
-//  if (iRet < 0)
-//  {
-//    assert (iRet >= 0);
-//  }
-//  return iRet;
-//}
-//=============================================================================
 int sstMath01Mbr2Cls::Move_XY2 ( int         Key,     // v  -> Vorerst immer 0
                      double      Dx,      // v  -> Verschiebungswert X
                      double      Dy)      // v  -> Verschiebungswert Y
 //.............................................................................
 {
   int iRet;
-  // Cint2 iStat;
 //.............................................................................
   if (Key != 0) return -1;
   iRet = 0;
