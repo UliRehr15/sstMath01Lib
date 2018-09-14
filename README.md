@@ -10,7 +10,7 @@ Coordinate Transformations classes (Trn) between
 
 Class for Minimum Bounding Rectangles (Mbr)
 
-Compile with QT 5.5.1 and QTCreator 3.5.1
+This Library is created with QtCreator 4.5.2 and gcc 7.3.0.
 
 Structure of coding projects should be:
 
@@ -29,3 +29,4 @@ Structure of coding projects should be:
                        Lib sstMath01Lib needs now Lib sst_str01_lib. <BR>
 20180219: Version 1.7: Class CoorTrn: New functions Transform_WC_DC, Transform_DC_WC. <BR>
 20180309: Version 1.8: A lot of functions of D2Pnt and D3Pnt, most still in german. <BR>
+20180914: Version 1.9: Update to QtCreator 4.5.2 and gcc 7.3.0. <BR>
