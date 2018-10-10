@@ -1,4 +1,4 @@
-/**********************************************************************
+﻿/**********************************************************************
  *
  * sstMath01Lib - cpp math and geometry function library for sst (Version 1)
  * Hosted on github
@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMath01Pnt1.cpp    09.03.18  Re.    30.12.16  Re.
+// sstMath01Pnt1.cpp    30.12.16  Re.    30.12.16  Re.
 //
 
 #include <stdio.h>
@@ -1355,6 +1355,23 @@ sstMath01dPnt2Cls sstMath01dPnt3Cls::GetD2Pnt ()
   D2Pkt.y = this->y;
 
   return D2Pkt;
+}
+//=============================================================================
+std::string sstMath01dPnt3Cls::toString ()
+//.............................................................................
+{
+  std::string oPntStr;
+//.............................................................................
+
+  sstStr01Cls oStrCnvt;
+  // std::string oMimaStr;
+  // Set number of decimal values for formatting double/float
+  oStrCnvt.setUiDec( 2);
+  // Set decimal type decimal point
+  oStrCnvt.setDecType ( 1);
+  oStrCnvt.Csv_Dbl_2String(0,this->x,&oPntStr);
+  oStrCnvt.Csv_Dbl_2String(0,this->y,&oPntStr);
+  return oPntStr;
 }
 //=============================================================================
 sstMath01Plane::sstMath01Plane()
