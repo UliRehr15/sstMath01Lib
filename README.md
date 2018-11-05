@@ -31,3 +31,4 @@ Structure of coding projects should be:
 20180309: Version 1.8: A lot of functions of D2Pnt and D3Pnt, most still in german. <BR>
 20180914: Version 1.9: Update to QtCreator 4.5.2 and gcc 7.3.0. <BR>
 20181010: Version 1.10: New Convert 3D Pnt to csv string function. <BR>
+20181102: Version 1.11: Getter functions for 2d double Pnt, 3d double Pnt Classes. <BR>

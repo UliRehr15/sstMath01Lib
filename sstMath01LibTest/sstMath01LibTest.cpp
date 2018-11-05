@@ -83,7 +83,7 @@ int main (int argc, char *argv [])
   iStat = Test_Mbr ( 0);
   assert(iStat==0);
 
-  // Convert Pnt to csv-string with decimal point and 2 digits
+  // Convert Pnt to csv-string with decimal point char and 2 decimal values
   std::string oTestStr = Pnt1.toString();
   assert(oTestStr.compare("32538589.00;5801400.00")==0);
 

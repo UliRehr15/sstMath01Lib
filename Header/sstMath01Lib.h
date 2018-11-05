@@ -558,8 +558,27 @@ int Set (       double  xx,       // v -> x-Coordinate
 *
 * @date 17.04.09  Re
 */
-int Get (       double *xx,      //   <-  x-Coordinate
+//-----------------------------------------------------------------------------
+int Get (       double *xx,       //   <-  x-Coordinate
                 double *yy);      //   <-  y-Coordinate
+//==============================================================================
+/**
+* @brief // Get X Coordinate from 2D Point <BR>
+* dX = oPnt.getX ();
+*
+* @return X Coordinate from 2D Pnt
+*/
+// ----------------------------------------------------------------------------
+double getX();
+//==============================================================================
+/**
+* @brief // Get Y Coordinate from 2D Point <BR>
+* dY = oPnt.getY ();
+*
+* @return Y Coordinate from 2D Pnt
+*/
+// ----------------------------------------------------------------------------
+double getY();
 //=============================================================================
 /**
 * @brief Im rechtwinkeligen Dreieck aus Katheten Hypothenuse berechnen
@@ -1304,7 +1323,7 @@ class sstMath01dPnt3Cls
  sstMath01dPnt2Cls GetD2Pnt ();
  //==============================================================================
  /**
- * @brief // Convert Coordinates to string <BR>
+ * @brief // Convert Pnt to csv-string with decimal point char and 2 decimal values <BR>
  *
  * @return string
  */
@@ -1366,6 +1385,33 @@ class sstMath01dPnt3Cls
                  double *xx,      //   <-  x-Coordinate
                  double *yy,      //   <-  y-Coordinate
                  double *zz);     //   <-  z-Coordinate
+ //==============================================================================
+ /**
+ * @brief // Get X Coordinate from 3D Point <BR>
+ * dX = oPnt.getX ();
+ *
+ * @return X Coordinate from 3D Pnt
+ */
+ // ----------------------------------------------------------------------------
+ double getX();
+ //==============================================================================
+ /**
+ * @brief // Get Y Coordinate from 3D Point <BR>
+ * dY = oPnt.getY ();
+ *
+ * @return Y Coordinate from 3D Pnt
+ */
+ // ----------------------------------------------------------------------------
+ double getY();
+ //==============================================================================
+ /**
+ * @brief // Get Z Coordinate from 3D Point <BR>
+ * dY = oPnt.getZ ();
+ *
+ * @return Z Coordinate from 3D Pnt
+ */
+ // ----------------------------------------------------------------------------
+ double getZ();
  //=============================================================================
  /**
  * @brief Calculate Distance when within the Limiations

@@ -482,6 +482,16 @@ int sstMath01dPnt2Cls::Get (  double *xx,      //   <-  x-Coordinate
   return iRet;
 }
 //=============================================================================
+double sstMath01dPnt2Cls::getX()
+{
+  return this->x;
+}
+//=============================================================================
+double sstMath01dPnt2Cls::getY()
+{
+  return this->y;
+}
+//=============================================================================
 int sstMath01dPnt2Cls::Pytha_Hypo ( int   Key,        // v  -> Vorerst immer 0
                         double  Ankath,     // v  -> Ankathete
                         double  Gegenkath,  // v  -> Gegenkathete
@@ -1109,6 +1119,21 @@ int sstMath01dPnt3Cls::Get (int     iKey,    // v  -> For the moment 0
   iRet = iStat;
 
   return iRet;
+}
+//=============================================================================
+double sstMath01dPnt3Cls::getX()
+{
+  return this->x;
+}
+//=============================================================================
+double sstMath01dPnt3Cls::getY()
+{
+  return this->y;
+}
+//=============================================================================
+double sstMath01dPnt3Cls::getZ()
+{
+  return this->z;
 }
 //=============================================================================
 int sstMath01dPnt3Cls::CalcDistLimit ( int    iKey,        // v  -> For the moment 0
