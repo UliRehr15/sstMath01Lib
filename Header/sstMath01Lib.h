@@ -11,8 +11,13 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
+// sstMath01Lib.h   24.11.18  Re.   07.01.17  Re.
 //
 // Datastructures and Prototypes for system "sstMath01Lib"
+//
+// mathematical classes and functions for the sst world
+// minimal bounding rectangle class
+// Coordinates transformation class
 //
 
 #ifndef   _SST_MATH01_LIB_HEADER
@@ -2448,6 +2453,27 @@ class sstMath01CoorTrnCls
      // ----------------------------------------------------------------------------
      int Transform_DC_WC (int iKey, double *dX, double *dY);
      //==============================================================================
+     /**
+     * @brief // Scal Distance in world coodinates to device/screen coordinates <BR>
+     * dDcDist = oCoorTrn.Transform_WC_DC_Dist( dWcDist);
+     *
+     * @param dWcDist [in] Distance in World coordinates
+     *
+     * @return Scaled distance in device / screen coordinates
+     */
+     // ----------------------------------------------------------------------------
+     double Transform_WC_DC_Dist (const double dWcDist);
+     //==============================================================================
+     /**
+     * @brief // Scal Distance in device/screen coordinates to world coordinates <BR>
+     * dWcDist = oCoorTrn.Transform_DC_WC_Dist( dDcDist);
+     *
+     * @param dDcDist [in] Distance in device/screen coordinates
+     *
+     * @return Scaled distance in world coordinates
+     */
+     // ----------------------------------------------------------------------------
+     double Transform_DC_WC_Dist (const double dDcDist);
 
 
   private:  // Private functions

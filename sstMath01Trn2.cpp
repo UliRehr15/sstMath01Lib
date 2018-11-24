@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMath01Trn2.cpp    30.12.16  Re.    30.12.16  Re.
+// sstMath01Trn2.cpp    24.11.18  Re.    30.12.16  Re.
 //
 
 #include <stdio.h>
@@ -469,6 +469,24 @@ int sstMath01CoorTrnCls::Transform_DC_WC (int iKey, double *dX, double *dY)
   iRet = iStat;
 
   return iRet;
+}
+//=============================================================================
+double sstMath01CoorTrnCls::Transform_WC_DC_Dist (const double dWcDist)
+{
+  double dScalX = 0.0;
+  double dScalY = 0.0;
+  double dScalZ = 0.0;
+  this->sTrnWC_DC.GetScal(0,&dScalX,&dScalY,&dScalZ);
+  return dScalX * dWcDist;
+}
+//=============================================================================
+double sstMath01CoorTrnCls::Transform_DC_WC_Dist (const double dDcDist)
+{
+  double dScalX = 0.0;
+  double dScalY = 0.0;
+  double dScalZ = 0.0;
+  this->sTrnDC_WC.GetScal(0,&dScalX,&dScalY,&dScalZ);
+  return dScalX * dDcDist;
 }
 //=============================================================================
 

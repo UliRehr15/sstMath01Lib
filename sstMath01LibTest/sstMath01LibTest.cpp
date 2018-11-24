@@ -49,11 +49,28 @@ int main (int argc, char *argv [])
   Pnt2.x =  32541354.0;  // test point 2
   Pnt2.y =   5804394.0;
 
+  sstMath01dPnt3Cls dDcPnt1 = Pnt1;
+  sstMath01dPnt3Cls dDcPnt2 = Pnt2;
+
+  double dWcDist = Pnt1.Strecke(&Pnt2);  // Calculate Distance in world coordinates
 
   // calculate Transformations
   iStat = oCoorTrn.Calc_All ( 1, sWC_MiMa, ulDB_Max, dDC_Max);
 
-  // calculate device points
+  // Transform points itself to screen coordinates
+  iStat = oCoorTrn.Transform_WC_DC(0,&dDcPnt1.x,&dDcPnt1.y);
+  iStat = oCoorTrn.Transform_WC_DC(0,&dDcPnt2.x,&dDcPnt2.y);
+
+  // calculate distance on screen
+  double dDcDist1 = dDcPnt1.Strecke(&dDcPnt2);
+
+  // calculate screen distance with function
+  double dDcDist2 = oCoorTrn.Transform_WC_DC_Dist(dWcDist);
+
+  // had to be identical
+  assert(dDcDist2 >= (dDcDist1 - fLim) && dDcDist2 <= (dDcDist1 + fLim));
+
+  // calculate device/screen points
   iStat = oCoorTrn.Pnt3WC_DC2 ( 0, &Pnt1, &fDC_Pnt1);
   iStat = oCoorTrn.Pnt3WC_DC2 ( 0, &Pnt2, &fDC_Pnt2);
 
