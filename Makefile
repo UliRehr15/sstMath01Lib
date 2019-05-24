@@ -51,12 +51,14 @@ SOURCES       = sstMath01Lib.cpp \
 		sstMath01Pnt1.cpp \
 		sstMath01Trn1.cpp \
 		sstMath01Trn2.cpp \
-		sstMath01Mima2.cpp 
+		sstMath01Mima2.cpp \
+		sstMath01Angle.cpp 
 OBJECTS       = sstMath01Lib.o \
 		sstMath01Pnt1.o \
 		sstMath01Trn1.o \
 		sstMath01Trn2.o \
-		sstMath01Mima2.o
+		sstMath01Mima2.o \
+		sstMath01Angle.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -129,7 +131,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		sstMath01Pnt1.cpp \
 		sstMath01Trn1.cpp \
 		sstMath01Trn2.cpp \
-		sstMath01Mima2.cpp
+		sstMath01Mima2.cpp \
+		sstMath01Angle.cpp
 QMAKE_TARGET  = sstMath01Lib_d
 DESTDIR       = ../libs/
 TARGET        = libsstMath01Lib_d.a
@@ -350,6 +353,10 @@ sstMath01Mima2.o: sstMath01Mima2.cpp ../sst_str01_lib/Header/sstStr01Lib.h \
 		Header/sstMath01Lib.h \
 		sstMath01LibInt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMath01Mima2.o sstMath01Mima2.cpp
+
+sstMath01Angle.o: sstMath01Angle.cpp Header/sstMath01Lib.h \
+		sstMath01LibInt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sstMath01Angle.o sstMath01Angle.cpp
 
 ####### Install
 

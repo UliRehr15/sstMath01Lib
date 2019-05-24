@@ -9,6 +9,7 @@ Coordinate Transformations classes (Trn) between
   - Device (Screen) Coordinates
 
 Class for Minimum Bounding Rectangles (Mbr)
+Class for Calculating with Angle Values
 
 This Library is created with QtCreator 4.5.2 and gcc 7.3.0.
 
@@ -33,3 +34,4 @@ Structure of coding projects should be:
 20181010: Version 1.10: New Convert 3D Pnt to csv string function. <BR>
 20181102: Version 1.11: Getter functions for 2d double Pnt, 3d double Pnt Classes. <BR>
 20181124: Version 1.12: New Scal Distance functions for CoorTrn Class.  <BR>
+20190524: Version 1.13: Add Helper Class for Calculating with Angle Values. <BR>

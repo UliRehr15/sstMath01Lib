@@ -2707,6 +2707,162 @@ class sstMath01Plane
      double   d;         /**< Ebene: ax + by + cz = d */
   private:  // Private functions
 };
+//==============================================================================
+/**
+* @brief Helper Class for Calculating with Angles
+*
+* More Comment
+*
+* Changed: 20.05.19  Re.
+*
+* @ingroup sstMath01Lib
+*
+* @author Re.
+*
+* @date 19.10.01
+*/
+// ----------------------------------------------------------------------------
+class sstMath01AngCalcCls
+{
+  public:   // Public functions
+     sstMath01AngCalcCls();   // Constructor
+    // ~X();   // Destructor
+     //==============================================================================
+     /**
+     * @brief // Normalize float angle <BR>
+     * iStat = oAngCalc.Norm4( iKey);
+     *
+     * iKey = 0: Radian
+     * iKey = 1: Degrees
+     * iKey = 2: Gon
+     *
+     * @param iKey [in] 0,1,2,
+     * @param Wink [out] Normalized angle
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int Norm4 ( int    iKey,   // v  -> 0,1 oder 2
+                 float *Wink);  //   <-> Winkel
+     //==============================================================================
+     /**
+     * @brief // Normalize double Angle <BR>
+     * iStat = oAngCalc.Norm8( iKey);
+     *
+     * iKey = 0: Radian
+     * iKey = 1: Degrees
+     * iKey = 2: Gon
+     *
+     * @param iKey [in] 0,1,2,
+     * @param Wink [out] Normalized angle
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int Norm8 ( int   iKey,   // v  -> 0,1 oder 2
+                         double *Wink);  //   <-> Winkel
+     //==============================================================================
+     /**
+     * @brief // Change angle from mathematical system to geodetical <BR>
+     * iStat = oAngCalc.Mat2Geo ( iKey, MWnk, &GWnk);
+     *
+     *  Mathematical: Rotate Counterclock, Angle Zero is in East <BR>
+     *  Geodetical:   Rotate with Clock, Angle Zero is in North  <BR>
+     *
+     * @param iKey [in] For the moment 0
+     * @param MWnk [in] Mathematical angle
+     * @param GWnk [out] Geodetical angle
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int Mat2Geo ( int     iKey,   // v  -> Vorerst immer 0
+                   double  MWnk,  //    -> Mathematischer Winkel
+                   double *GWnk);  //   <-  Geodätischer Winkel
+     //==============================================================================
+     /**
+     * @brief // Find Position of Angle to given Angle <BR>
+     * iStat = oAngCalc.FindPosition( iKey, dGivenAngle, FindAngle);
+     *
+     * @param iKey [in] For the moment 0
+     * @param dGivenAngle [in] Given Angle
+     * @param dFindAngle  [in] Find Angle
+     *
+     * @return Positon of Angle
+     *
+     * @retval   = 0: Find Angle is right
+     * @retval   = 1: Find Angle is left
+     */
+     // ----------------------------------------------------------------------------
+     int FindPosition (int iKey, double dGivenAngle, double dFindAngle);
+     //==============================================================================
+     /**
+     * @brief // Calculate Diffence of two Angles <BR>
+     * iStat = oAngCalc.AngleDiff( iKey, dAngle1, dAngle2, &dDiffAngle);
+     *
+     * Result Difference Angle could be betreen -Pi and PI. <BR>
+     * Positive: Angle rotates counterclock and is left.    <BR>
+     * Negative: Angle rotates with clock and is right.     <BR>
+     *
+     * @param iKey       [in] For the moment 0
+     * @param dAngle1    [in] First Angle Radian
+     * @param dAngle2    [in] Second Angle Radian
+     * @param dDiffAngle [out] Difference Angle
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int AngleDiff (int iKey, double dAngle1, double dAngle2, double *dDiffAngle);
+     //==============================================================================
+     /**
+     * @brief // Find Middle angle of two given Angles <BR>
+     * iStat = oAngCalc.AngleMiddle( iKey, dAngle1, dAngle2, &dMiddleAngle);
+     *
+     * @param iKey [in] For the moment 0
+     * @param dAngle1 [in] First angle
+     * @param dAngle2 [in] Second Angle
+     * @param dMiddleAngle [out] Result Middle Angle
+     *
+     * @return Errorstate
+     *
+     * @retval   = 0: OK
+     * @retval   < 0: Unspecified Error
+     */
+     // ----------------------------------------------------------------------------
+     int AngleMiddle (int iKey, double dAngle1, double dAngle2, double *dMiddleAngle);
+     //==============================================================================
+     /**
+     * @brief // Test is Angle inside Arc <BR>
+     * iStat = oAngCalc.ArcInside ( iKey, dAngle1, dAngle2, dTestAngle);
+     *
+     * @param iKey       [in] For the moment 0
+     * @param dAngle1    [in] First Angle of Arc
+     * @param dAngle2    [in] Second Angle of Arc
+     * @param dTestAngle [in] Given Test Angle
+     *
+     * @return Return between or not
+     *
+     * @retval   = 0: Given Angle is not between
+     * @retval   = 1: Given Angle is between
+     */
+     // ----------------------------------------------------------------------------
+     int ArcInside (int iKey, double dWnk1, double dWnk2, double dTestAngle);
+     //==============================================================================
+  private:  // Private functions
+  // int Dum;        /**< Dummy */
+};
 //-----------------------------------------------------------------------------
 
 

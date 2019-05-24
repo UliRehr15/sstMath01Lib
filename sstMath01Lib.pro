@@ -19,7 +19,8 @@ SOURCES		+= sstMath01Lib.cpp \
              sstMath01Pnt1.cpp \
              sstMath01Trn1.cpp \
              sstMath01Trn2.cpp \
-    sstMath01Mima2.cpp
+    sstMath01Mima2.cpp \
+    sstMath01Angle.cpp
 
 OTHER_FILES += README.md
 
