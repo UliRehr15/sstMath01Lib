@@ -35,3 +35,6 @@ Structure of coding projects should be:
 20181102: Version 1.11: Getter functions for 2d double Pnt, 3d double Pnt Classes. <BR>
 20181124: Version 1.12: New Scal Distance functions for CoorTrn Class.  <BR>
 20190524: Version 1.13: Add Helper Class for Calculating with Angle Values. <BR>
+20190603: Version 1.14: Fixed problems in use of scal, move and rotate of transformation. <BR>
+20190617: Version 1.15: More functions for coordinate transformation of points. <BR>
+20200127: Version 1.16: Better Names for Defines, more functions for coordinate transformation. <BR>

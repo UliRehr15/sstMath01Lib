@@ -29,9 +29,6 @@
  *
  *  Hier sind alle Defines die mit PI zusammenhängen definiert.
 */
-#define PIH      1.57079632679489661926     /** PIH = 0.5 * PI          @ingroup Geometrie */
-#define PI       3.14159265358979323851     /** PI = 4.0 * atanl(1.0)   @ingroup Geometrie */
-#define ZWPI     6.28318530717958647703     /** ZWPI = 2.0 * PI         @ingroup Geometrie */
 #define RHO20    63.6619772367581343055     /** RHO20 = 200.0 gon / PI  @ingroup Geometrie */
 #define RHO18    57.2957795130823208767     /** RHO18 = 180.0 Grad/ PI  @ingroup Geometrie */
 #define GON      0.01570796326794896619     /** Rad-Wert für ein Gon    @ingroup Geometrie */

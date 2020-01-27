@@ -38,8 +38,13 @@
  *  Hier sind Makros für x^2 und x^3 definiert. Wenn weitere Makros für x^n
  *  folgen, sollten sie hier definiert werden.
 */
-#define Quadr(x)   ((x)*(x))            /** x^2     @ingroup sstMath01Lib */
-#define Kubic(x)   ((x)*(x)*(x))        /** x^3     @ingroup sstMath01Lib */
+#define Quadr(x)   ((x)*(x))            //!<  x^2     @ingroup sstMath01Lib */
+#define Kubic(x)   ((x)*(x)*(x))        //!<  x^3     @ingroup sstMath01Lib */
+
+#define dSSTMATH01_PIH      1.57079632679489661926     //!<  PIH = 0.5 * PI          @ingroup sstMath01Lib */
+#define dSSTMATH01_PI       3.14159265358979323851     //!<  PI = 4.0 * atanl(1.0)   @ingroup sstMath01Lib */
+#define dSSTMATH01_ZWPI     6.28318530717958647703     //!<  ZWPI = 2.0 * PI         @ingroup sstMath01Lib */
+
 
 // Forward declarations --------------------------------------------------------
 class sstMath01dPnt3Cls;
@@ -2115,8 +2120,8 @@ class sstMath01TrnCls
      * Weiterer Kommentar
      *
      * @param iKey   [in]  Vorerst immer 0
-     * @param PntIn  [in]  2D-Punkt
-     * @param PntOut [out] Transformierter Punkt
+     * @param poPntIn  [in]  2D-Punkt
+     * @param poPntOut [out] Transformierter Punkt
      *
      * @return Fehlerstatus
      *
@@ -2124,9 +2129,24 @@ class sstMath01TrnCls
      * @retval   <0 = allgemeiner Fehler
      */
      //-----------------------------------------------------------------------------
-     int CalcPnt2 ( int               iKey,
-                    sstMath01dPnt2Cls           *PntIn,
-                    sstMath01dPnt2Cls           *PntOut);
+     int CalcPnt2 ( int                  iKey,
+                    sstMath01dPnt2Cls   *poPntIn,
+                    sstMath01dPnt2Cls   *poPntOut);
+     //=============================================================================
+     /**
+     * @brief transform 2D point with tranformation matrix
+     *
+     * @param iKey     [in]     Vorerst immer 0
+     * @param poTrnPnt [in out] Pnt for coodinate transformation
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     //-----------------------------------------------------------------------------
+     int CalcPntX2 ( int                  iKey,
+                     sstMath01dPnt2Cls   *poTrnPnt);
      //=============================================================================
      /**
      * @brief transform 3D Point with transformation matrix
@@ -2144,6 +2164,21 @@ class sstMath01TrnCls
      int CalcPnt3 ( int                 iKey,
                     const sstMath01dPnt3Cls   *PntIn,
                     sstMath01dPnt3Cls         *PntOut);
+     //=============================================================================
+     /**
+     * @brief transform 3D Point with transformation matrix
+     *
+     * @param iKey   [in]      Vorerst immer 0
+     * @param PntIn  [in out]  3D-Point for coordinate transformation
+     *
+     * @return Fehlerstatus
+     *
+     * @retval   =0 = OK
+     * @retval   <0 = allgemeiner Fehler
+     */
+     //-----------------------------------------------------------------------------
+     int CalcPnt3X ( int                  iKey,
+                     sstMath01dPnt3Cls   *PntIn);
      //=============================================================================
      /**
      * @brief multiply two tranformation matixes
@@ -2858,7 +2893,7 @@ class sstMath01AngCalcCls
      * @retval   = 1: Given Angle is between
      */
      // ----------------------------------------------------------------------------
-     int ArcInside (int iKey, double dWnk1, double dWnk2, double dTestAngle);
+     int ArcInside (int iKey, double dAngle1, double dAngle2, double dTestAngle);
      //==============================================================================
   private:  // Private functions
   // int Dum;        /**< Dummy */

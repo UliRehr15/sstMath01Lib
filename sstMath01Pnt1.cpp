@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMath01Pnt1.cpp    30.12.16  Re.    30.12.16  Re.
+// sstMath01Pnt1.cpp    27.01.20  Re.    30.12.16  Re.
 //
 
 #include <stdio.h>
@@ -73,7 +73,7 @@ double sstMath01dPnt2Cls::Riwi ( sstMath01dPnt2Cls *P2)
 
   riwi = atan2(dx, dy);                              // Im Intervall [-PI, PI[
 
-  if (riwi < 0.0) riwi += ZWPI;                          // Intervall [0, 2PI[
+  if (riwi < 0.0) riwi += dSSTMATH01_ZWPI;                          // Intervall [0, 2PI[
 
   return(riwi);
 }
@@ -158,12 +158,12 @@ double sstMath01dPnt2Cls::SnitWinkl ( sstMath01dPnt2Cls *P2, sstMath01dPnt2Cls *
 
    b1 = Vb1.VBetrag();                                            // Beträge
    b2 = Vb2.VBetrag();
-   if ((b1 < 1e-99) || (b2 < 1e-99)) return(-PI);
+   if ((b1 < 1e-99) || (b2 < 1e-99)) return(-dSSTMATH01_PI);
 
    cosi = (Vb1.x*Vb2.x + Vb1.y*Vb2.y) / b1 / b2;
 
    if (cosi >= 1.0) return(0.0);                                    // Parallel
-   if (cosi <= -1.0) return(PI);                        // Gegenläufig parallel
+   if (cosi <= -1.0) return(dSSTMATH01_PI);                        // Gegenläufig parallel
 
    return(acos(cosi));                                   // Irgendwo dazwischen
   }
@@ -306,25 +306,25 @@ double sstMath01dPnt2Cls::Kreis ( sstMath01dPnt2Cls *P2, sstMath01dPnt2Cls *P3, 
 
    if (ss12)                                                      // S12 ist ok
      {
-      t1 = PIH + this->Riwi( P2);
+      t1 = dSSTMATH01_PIH + this->Riwi( P2);
       P_1.x = 0.5 * (this->x + P2->x);
       P_1.y = 0.5 * (this->y + P2->y);
      }
    if (ss13 && ss23)                                         // S13 und ss23 ok
      {
-      t1 = PIH + this->Riwi( P3);
+      t1 = dSSTMATH01_PIH + this->Riwi( P3);
       P_1.x = 0.5 * (this->x + P3->x);
       P_1.y = 0.5 * (this->y + P3->y);
      }
    if (ss12 && ss13)                                         // S12 und ss13 ok
      {
-      t2 = PIH + this->Riwi( P3);
+      t2 = dSSTMATH01_PIH + this->Riwi( P3);
       P_3.x = 0.5 * (this->x + P3->x);
       P_3.y = 0.5 * (this->y + P3->y);
      }
    if (ss23)                                                      // S23 ist ok
      {
-      t2 = PIH + P2->Riwi( P3);
+      t2 = dSSTMATH01_PIH + P2->Riwi( P3);
       P_3.x = 0.5 * (P2->x + P3->x);
       P_3.y = 0.5 * (P2->y + P3->y);
      }
@@ -554,16 +554,16 @@ int sstMath01dPnt2Cls::Kart_Abs ( int   Key,  // v  -> Vorerst immer 0
       }
       else
       { *Wink = acos( -this->y / *Dist);       /* Vierter Quadrant */
-        *Wink = *Wink + PI + PIH;
+        *Wink = *Wink + dSSTMATH01_PI + dSSTMATH01_PIH;
       }
     else
       if ( this->y >= 0)
       { *Wink = acos(  this->y / *Dist);       /* Zweiter Quadrant */
-        *Wink = *Wink + PIH;
+        *Wink = *Wink + dSSTMATH01_PIH;
       }
       else
       { *Wink = acos( -this->x / *Dist);      /* Dritter Quadrant */
-        *Wink = *Wink + PI;
+        *Wink = *Wink + dSSTMATH01_PI;
       }
   }
   return iRet;
@@ -801,12 +801,12 @@ double sstMath01dPnt3Cls::RtgDif ( sstMath01dPnt3Cls *P2, sstMath01dPnt3Cls *P3,
 
    b1 = Vg1.VBetrag();                                            // Beträge
    b2 = Vg2.VBetrag();
-   if ((b1 < 1e-99) || (b2 < 1e-99)) return(-PI);
+   if ((b1 < 1e-99) || (b2 < 1e-99)) return(-dSSTMATH01_PI);
 
    cosi = (Vg1.x*Vg2.x + Vg1.y*Vg2.y + Vg1.z*Vg2.z) / b1 / b2;
 
    if (cosi >= 1.0) return(0.0);                                    // Parallel
-   if (cosi <= -1.0) return(PI);                        // Gegenläufig parallel
+   if (cosi <= -1.0) return(dSSTMATH01_PI);                        // Gegenläufig parallel
 
    return(acos(cosi));                                   // Irgendwo dazwischen
   }
@@ -956,12 +956,12 @@ double sstMath01dPnt3Cls::FusPktE ( sstMath01Plane *Eb, sstMath01dPnt3Cls *Pf)
 
    b1 = Vn1.VBetrag();                                            // Beträge
    b2 = Vn2.VBetrag();
-   if ((b1 < 1e-99) || (b2 < 1e-99)) return(-PI);
+   if ((b1 < 1e-99) || (b2 < 1e-99)) return(-dSSTMATH01_PI);
 
    cosi = (Vn1.x*Vn2.x + Vn1.y*Vn2.y + Vn1.z*Vn2.z) / b1 / b2;
 
    if (cosi >= 1.0) return(0.0);                                    // Parallel
-   if (cosi <= -1.0) return(PI);                        // Gegenläufig parallel
+   if (cosi <= -1.0) return(dSSTMATH01_PI);                        // Gegenläufig parallel
 
    return(acos(cosi));                                   // Irgendwo dazwischen
   }

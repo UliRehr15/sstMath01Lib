@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMath01Angle.cpp    24.05.19  Re.    24.05.19  Re.
+// sstMath01Angle.cpp    27.01.20  Re.    24.05.19  Re.
 //
 // Funktionen rund um den Winkel als solchen.
 // Datei existiert auch in Bibiothek sstlib.
@@ -37,32 +37,12 @@ sstMath01AngCalcCls::sstMath01AngCalcCls()
 
 }
 //=============================================================================
-//$DA
-//$TOPIC Wnk_Norm4
-int sstMath01AngCalcCls::Norm4 ( int    Key,   // v  -> 0,1 oder 2
-                                     float *Wink)  //   <-> Winkel
-                           //   <- Rückgabe Funktion
-                           //      0 = OK
-                           //     <0 = allgemeiner Fehler
-//
-//  Erstellt: 19.10.01   UR
-//  Geändert: 22.10.01   UR
-//
-//$KAT Basics
-//$KT Richtungswinkel (Real) in den Bereich 0 bis 2PI normieren
-//
-// Richtungswinkel (Real) in den Bereich 0 bis 2PI normieren
-//
-// Key = 0: Winkel ist und bleibt Rad
-// Key = 1: Winkel ist und bleibt Gon
-// Key = 2: Winkel ist und bleibt Grad
-//
-//$DE
+int sstMath01AngCalcCls::Norm4 ( int    Key,
+                                 float *Wink)
 //.............................................................................
 
 {
   int iret;
-  // Cint2 istat;
 
 //.............................................................................
   if (Key < 0 || Key > 2) return -1;
@@ -73,12 +53,12 @@ int sstMath01AngCalcCls::Norm4 ( int    Key,   // v  -> 0,1 oder 2
   {
     case 0:
       // Radiant
-      // Konstante ZWPI ist in MATHEM definiert.
+      // Konstante dSSTMATH01_ZWPI ist in sstMath01Lib.h definiert.
       while (*Wink < 0)
-       *Wink = *Wink + (float) ZWPI;
+       *Wink = *Wink + (float) dSSTMATH01_ZWPI;
 
-      while (*Wink  >= ZWPI)
-       *Wink = *Wink - (float) ZWPI;
+      while (*Wink  >= dSSTMATH01_ZWPI)
+       *Wink = *Wink - (float) dSSTMATH01_ZWPI;
 
       break;
     case 1:
@@ -107,26 +87,8 @@ int sstMath01AngCalcCls::Norm4 ( int    Key,   // v  -> 0,1 oder 2
 
 }
 //=============================================================================
-//$DA
-//$TOPIC Wnk_Norm8
-int sstMath01AngCalcCls::Norm8 ( int   Key,   // v  -> 0,1 oder 2
-                    double *Wink)  //   <-> Winkel
-                           //   <- Rückgabe Funktion
-                           //      0 = OK
-                           //     <0 = allgemeiner Fehler
-//
-//  Erstellt: 19.10.01   UR
-//  Geändert: 22.10.01   UR
-//
-//$KAT Basics
-//$KT Richtungswinkel (Double) in den Bereich 0 bis 2PI normieren
-// Richtungswinkel (Double) in den Bereich 0 bis 2PI normieren
-//
-// Key = 0: Winkel ist und bleibt Rad
-// Key = 1: Winkel ist und bleibt Gon
-// Key = 2: Winkel ist und bleibt Grad
-//
-//$DE
+int sstMath01AngCalcCls::Norm8 ( int     Key,
+                                 double *Wink)
 //.............................................................................
 
 {
@@ -142,12 +104,12 @@ int sstMath01AngCalcCls::Norm8 ( int   Key,   // v  -> 0,1 oder 2
   {
     case 0:
       // Radiant
-      // Konstante ZWPI ist in MATHEM definiert.
+      // Konstante dSSTMATH01_ZWPI ist in sstMath01Lib.h definiert.
       while (*Wink < 0)
-       *Wink = *Wink + ZWPI;
+       *Wink = *Wink + dSSTMATH01_ZWPI;
 
-      while (*Wink  >= ZWPI)
-       *Wink = *Wink - ZWPI;
+      while (*Wink  >= dSSTMATH01_ZWPI)
+       *Wink = *Wink - dSSTMATH01_ZWPI;
 
       break;
     case 1:
@@ -208,7 +170,7 @@ int sstMath01AngCalcCls::Mat2Geo ( int   Key,   // v  -> Vorerst immer 0
   iret = 0;
   // istat = 0;
 
-  loc_pi =  PI;   // Define aus Mathem
+  loc_pi =  dSSTMATH01_PI;   // Define aus Mathem
   loc_pih = loc_pi / 2.0;
   loc_2pi = loc_pi * 2.0;
 
@@ -259,7 +221,7 @@ int sstMath01AngCalcCls::FindPosition (int iKey, double dWink1, double dWink2)
   // Richtungswinkel (Double) in den Bereich 0 bis 2PI normieren.
   iStat = this->Norm8 ( 0, &dWink2);
 
-  if (dWink2 >= 0.0 && dWink2 < PI)
+  if (dWink2 >= 0.0 && dWink2 < dSSTMATH01_PI)
   {
     iRet = 1;
   }
@@ -307,13 +269,13 @@ int sstMath01AngCalcCls::AngleDiff (int iKey, double dWink1, double dWink2, doub
   if (iLage == 1)
   {
     // Winkel liegt links
-    if(dWink1 > dWink2) dWink2 = dWink2 + ZWPI;
+    if(dWink1 > dWink2) dWink2 = dWink2 + dSSTMATH01_ZWPI;
     *dWinkDiff = dWink2 - dWink1;
   }
   else
   {
     // Winkel liegt rechts
-    if(dWink2 > dWink1) dWink1 = dWink1 + ZWPI;
+    if(dWink2 > dWink1) dWink1 = dWink1 + dSSTMATH01_ZWPI;
     *dWinkDiff = dWink1 - dWink2;
   }
 
@@ -321,9 +283,9 @@ int sstMath01AngCalcCls::AngleDiff (int iKey, double dWink1, double dWink2, doub
   iStat = this->Norm8 ( 0, dWinkDiff);
 
   // Winkel in den Bereich -PI/+PI schieben
-  if (*dWinkDiff > PI)
+  if (*dWinkDiff > dSSTMATH01_PI)
   {
-    *dWinkDiff = *dWinkDiff - PI;
+    *dWinkDiff = *dWinkDiff - dSSTMATH01_PI;
   }
 
   // Winkel negativ oder positiv
@@ -416,8 +378,8 @@ int sstMath01AngCalcCls::ArcInside (int iKey, double dWnk1, double dWnk2, double
 
   if (dWnk1 > dWnk2)
   {
-    dWnk2 = dWnk2 + ZWPI;
-    dWnkTest = dWnkTest + ZWPI;
+    dWnk2 = dWnk2 + dSSTMATH01_ZWPI;
+    dWnkTest = dWnkTest + dSSTMATH01_ZWPI;
   }
 
   if (dWnkTest > dWnk1 && dWnkTest < dWnk2) return 1;

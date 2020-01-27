@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMath01Trn1.cpp    30.12.16  Re.    30.12.16  Re.
+// sstMath01Trn1.cpp    27.01.20  Re.    30.12.16  Re.
 //
 
 #include <stdio.h>
@@ -60,9 +60,14 @@ int sstMath01TrnCls::SetMov ( int               Key,   // v  -> Vorerst immer 0
   if (Key != 0) return -1;
   iret = 0;
 
-  Trn[3][0] = MovX;
-  Trn[3][1] = MovY;
-  Trn[3][2] = MovZ;
+  sstMath01TrnCls oMovTrn;
+
+  oMovTrn.Trn[3][0] = MovX;
+  oMovTrn.Trn[3][1] = MovY;
+  oMovTrn.Trn[3][2] = MovZ;
+
+  this->TrnMult( 0, oMovTrn);
+
   return iret;
 }
 //=============================================================================
@@ -77,25 +82,34 @@ int sstMath01TrnCls::SetScal ( int             Key,    // v  -> Vorerst immer 0
   if (Key != 0) return -1;
   iret = 0;
 
-  Trn[0][0] = ScalX;
-  Trn[1][1] = ScalY;
-  Trn[2][2] = ScalZ;
+  sstMath01TrnCls oScalTrn;
+
+  oScalTrn.Trn[0][0] = ScalX;
+  oScalTrn.Trn[1][1] = ScalY;
+  oScalTrn.Trn[2][2] = ScalZ;
+
+  this->TrnMult( 0, oScalTrn);
+
   return iret;
 }
 //=============================================================================
-int sstMath01TrnCls::SetRotZ ( int               Key,    // v  -> Vorerst immer 0
-                               double            RotZ)   // v  -> Rotation Z-Achse
+int sstMath01TrnCls::SetRotZ ( int               iKey,
+                               double            dRotZ)
 //-----------------------------------------------------------------------------
 {
   int iret;
 //.............................................................................
-  if (Key != 0) return -1;
+  if (iKey != 0) return -1;
   iret = 0;
 
-  Trn[0][0] =   cos ( RotZ);
-  Trn[0][1] = - sin ( RotZ);
-  Trn[1][0] =   sin ( RotZ);
-  Trn[1][1] =   cos ( RotZ);
+  sstMath01TrnCls oRotTrn;
+  oRotTrn.Trn[0][0] =   cos ( dRotZ);
+  oRotTrn.Trn[0][1] = - sin ( dRotZ);
+  oRotTrn.Trn[1][0] =   sin ( dRotZ);
+  oRotTrn.Trn[1][1] =   cos ( dRotZ);
+
+  this->TrnMult( 0, oRotTrn);
+
   return iret;
 }
 //=============================================================================
@@ -146,9 +160,9 @@ int sstMath01TrnCls::GetRotZ ( int                Key,    // v  -> Vorerst immer
   return iret;
 }
 //=============================================================================
-int sstMath01TrnCls::CalcPnt2 ( int               Key,     // v  -> Vorerst immer 0
-                            sstMath01dPnt2Cls           *PktIn,   //    -> 2D-Punkt
-                            sstMath01dPnt2Cls           *PktOut)  //   <-  Transformierter Punkt
+int sstMath01TrnCls::CalcPnt2 ( int                 iKey,
+                                sstMath01dPnt2Cls  *poPktIn,
+                                sstMath01dPnt2Cls  *poPktOut)
 //-----------------------------------------------------------------------------
 {
   d4Pnt_stru  PIn;
@@ -159,11 +173,11 @@ int sstMath01TrnCls::CalcPnt2 ( int               Key,     // v  -> Vorerst imme
   double ce;
   int  iret;
 //.............................................................................
-  if (Key != 0) return -1;
+  if (iKey != 0) return -1;
   iret = 0;
 
-  PIn.Kor[0] = PktIn->x;
-  PIn.Kor[1] = PktIn->y;
+  PIn.Kor[0] = poPktIn->x;
+  PIn.Kor[1] = poPktIn->y;
   PIn.Kor[2] = 1.0;  // die ominöse homogene Koordinate ?
   PIn.Kor[3] = 1.0;  // die ominöse homogene Koordinate ?
 
@@ -177,15 +191,14 @@ int sstMath01TrnCls::CalcPnt2 ( int               Key,     // v  -> Vorerst imme
     POut.Kor[jj] = ce;
   }
 
-  PktOut->x = POut.Kor[0];
-  PktOut->y = POut.Kor[1];
+  poPktOut->x = POut.Kor[0];
+  poPktOut->y = POut.Kor[1];
 
   return iret;
 }
 //=============================================================================
-int sstMath01TrnCls::CalcPnt3 ( int                 Key,     // v  -> Vorerst immer 0
-                            const sstMath01dPnt3Cls   *PktIn,   //    -> 3D-Punkt
-                            sstMath01dPnt3Cls         *PktOut)  //   <-  Transformierter Punkt
+int sstMath01TrnCls::CalcPntX2 ( int                iKey,
+                                sstMath01dPnt2Cls  *poTrnPnt)
 //-----------------------------------------------------------------------------
 {
   d4Pnt_stru  PIn;
@@ -196,7 +209,44 @@ int sstMath01TrnCls::CalcPnt3 ( int                 Key,     // v  -> Vorerst im
   double ce;
   int  iret;
 //.............................................................................
-  if (Key != 0) return -1;
+  if (iKey != 0) return -1;
+  iret = 0;
+
+  PIn.Kor[0] = poTrnPnt->x;
+  PIn.Kor[1] = poTrnPnt->y;
+  PIn.Kor[2] = 1.0;  // die ominöse homogene Koordinate ?
+  PIn.Kor[3] = 1.0;  // die ominöse homogene Koordinate ?
+
+  for ( jj=0; jj<= 3; jj++)
+  {
+    ce = 0.0;
+    for ( ll=0; ll<= 3; ll++)
+      {
+        ce = PIn.Kor[ll] * Trn[ll][jj] + ce;
+      }
+    POut.Kor[jj] = ce;
+  }
+
+  poTrnPnt->x = POut.Kor[0];
+  poTrnPnt->y = POut.Kor[1];
+
+  return iret;
+}
+//=============================================================================
+int sstMath01TrnCls::CalcPnt3 ( int                        iKey,
+                                const sstMath01dPnt3Cls   *PktIn,
+                                sstMath01dPnt3Cls         *PktOut)
+//-----------------------------------------------------------------------------
+{
+  d4Pnt_stru  PIn;
+  d4Pnt_stru  POut;
+
+  int jj,ll;
+
+  double ce;
+  int  iret;
+//.............................................................................
+  if (iKey != 0) return -1;
   iret = 0;
 
   PIn.Kor[0] = PktIn->x;
@@ -217,6 +267,43 @@ int sstMath01TrnCls::CalcPnt3 ( int                 Key,     // v  -> Vorerst im
   PktOut->x = POut.Kor[0];
   PktOut->y = POut.Kor[1];
   PktOut->z = POut.Kor[2];
+
+  return iret;
+}
+//=============================================================================
+int sstMath01TrnCls::CalcPnt3X ( int                  iKey,
+                                 sstMath01dPnt3Cls   *oTrnPnt)
+//-----------------------------------------------------------------------------
+{
+  d4Pnt_stru  PIn;
+  d4Pnt_stru  POut;
+
+  int jj,ll;
+
+  double ce;
+  int  iret;
+//.............................................................................
+  if (iKey != 0) return -1;
+  iret = 0;
+
+  PIn.Kor[0] = oTrnPnt->x;
+  PIn.Kor[1] = oTrnPnt->y;
+  PIn.Kor[2] = oTrnPnt->z;
+  PIn.Kor[3] = 1.0;  // die ominöse homogene Koordinate ?
+
+  for ( jj=0; jj<= 3; jj++)
+  {
+    ce = 0.0;
+    for ( ll=0; ll<= 3; ll++)
+      {
+        ce = PIn.Kor[ll] * Trn[ll][jj] + ce;
+      }
+    POut.Kor[jj] = ce;
+  }
+
+  oTrnPnt->x = POut.Kor[0];
+  oTrnPnt->y = POut.Kor[1];
+  oTrnPnt->z = POut.Kor[2];
 
   return iret;
 }

@@ -15,7 +15,8 @@
 #include "sstMath01LibTest.h"
 
 //=============================================================================
-int main (int argc, char *argv [])
+// int main (int argc, char *argv [])
+int main ()
 //-----------------------------------------------------------------------------
 {
   int iRet  = 0;
@@ -97,6 +98,12 @@ int main (int argc, char *argv [])
   assert(Pnt3.x >= (Pnt2.x - fLim) && Pnt3.x <= (Pnt2.x + fLim));
   assert(Pnt3.y >= (Pnt2.y - fLim) && Pnt3.y <= (Pnt2.y + fLim));
 
+  // Test general coordinate transformation functions
+  iStat = Test_Trn ( 0);
+  assert(iStat==0);
+
+
+  // Test Mbr-Functions
   iStat = Test_Mbr ( 0);
   assert(iStat==0);
 
@@ -176,6 +183,82 @@ int Test_Mbr (int iKey)
 
   iStat = sWC_MiMa.Les2 ( 0, &MinX);
   iStat = sWC_MiMa.Les2 ( 1, &MinY);
+
+  return iRet;
+}
+//=============================================================================
+int Test_Trn (int iKey)
+//-----------------------------------------------------------------------------
+{
+  int iRet = 0;
+  int iStat = 0;
+//-----------------------------------------------------------------------------
+  if ( iKey != 0) return -1;
+
+  { // First Test with default values
+    sstMath01TrnCls oTrn;
+    oTrn.SetMov(0,0,0,0);
+    oTrn.SetScal(0,1,1,1);
+    oTrn.SetRotZ(0,0);
+    sstMath01dPnt2Cls oPntIn;
+    sstMath01dPnt2Cls oPntOut;
+
+    oTrn.CalcPnt2(0,&oPntIn, &oPntOut);
+    assert(oPntOut.getX() == 0.0);
+  }
+  { // Test with Move values
+    sstMath01TrnCls oTrn;
+    oTrn.SetMov(0,5,0,0);  // Move 5 in x direction
+    oTrn.SetScal(0,1,1,1);
+    oTrn.SetRotZ(0,0);
+    sstMath01dPnt2Cls oPntIn;
+    sstMath01dPnt2Cls oPntOut;
+
+    oTrn.CalcPnt2(0,&oPntIn, &oPntOut);
+    assert(oPntOut.getX() == 5.0);
+  }
+  { // Test with Scal values
+    sstMath01TrnCls oTrn;
+    oTrn.SetMov(0,0,0,0);
+    oTrn.SetScal(0,5,1,1);  // Scal 5 in x direction
+    oTrn.SetRotZ(0,0);
+    sstMath01dPnt2Cls oPntIn;
+    oPntIn.Set(1,1);
+    sstMath01dPnt2Cls oPntOut;
+
+    oTrn.CalcPnt2(0,&oPntIn, &oPntOut);
+    assert(oPntOut.getX() == 5.0);
+  }
+  { // Test with Rotation values
+    sstMath01TrnCls oTrn;
+    oTrn.SetMov(0,0,0,0);
+    oTrn.SetScal(0,1,1,1);
+    oTrn.SetRotZ(0, dSSTMATH01_PIH);  // Rotate with Pi Half
+    sstMath01dPnt2Cls oPntIn;
+    oPntIn.Set(5,1);
+    sstMath01dPnt2Cls oPntOut;
+
+    oTrn.CalcPnt2(0,&oPntIn, &oPntOut);
+    assert(oPntOut.getY() == -5.0);  // Rotates with clock
+  }
+  { // Test with Rotation values
+    sstMath01TrnCls oTrn;
+    oTrn.SetMov(0,0,0,0);
+    oTrn.SetScal(0,1,1,1);
+    oTrn.SetRotZ(0, dSSTMATH01_PIH);  // Rotate with Pi Half
+    sstMath01dPnt2Cls oPntIn;
+    oPntIn.Set(1,5);
+    sstMath01dPnt2Cls oPntOut;
+
+    oTrn.CalcPnt2(0,&oPntIn, &oPntOut);
+    assert(oPntOut.getX() == 5.0);  // Rotates with clock
+  }
+
+  // Fatal Errors goes to an assert
+  assert(iRet >= 0);
+
+  // Small Errors will given back
+  iRet = iStat;
 
   return iRet;
 }
