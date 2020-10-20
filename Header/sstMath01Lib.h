@@ -323,8 +323,8 @@ class sstMath01dPnt2Cls
      *
      * @return long int
      *
-     * @retval = D2_OK
-     * @retval = D2_PARALLEL
+     * @retval =D2_OK
+     * @retval =D2_PARALLEL
      *
      * @author Re.
      *
@@ -350,8 +350,8 @@ class sstMath01dPnt2Cls
      *
      * @return long int
      *
-     * @retval = D2_OK
-     * @retval = D2_PARALLEL
+     * @retval =D2_OK
+     * @retval =D2_PARALLEL
      *
      * @author Re.
      *
@@ -377,8 +377,8 @@ class sstMath01dPnt2Cls
      *
      * @return long int
      *
-     * @retval = D2_OK
-     * @retval = D2_AUSSEN
+     * @retval =D2_OK
+     * @retval =D2_AUSSEN
      *
      * @author Re.
      *
@@ -496,7 +496,7 @@ class sstMath01dPnt2Cls
      * @return int
      *
      * @retval = D2_OK
-     * @retval = -1: Key nicht Null
+     * @retval =-1: Key nicht Null
      *
      * @author Re.
      *
@@ -1208,8 +1208,8 @@ class sstMath01dPnt3Cls
       *
       * @return long int
       *
-      * @retval = D3_OK
-      * @retval = D3_SENKR
+      * @retval =D3_OK
+      * @retval =D3_SENKR
       *
       * @author RE.
       *
@@ -1231,8 +1231,8 @@ class sstMath01dPnt3Cls
       *
       * @return long int
       *
-      * @retval = D3_OK
-      * @retval = D3_PARALLEL
+      * @retval =D3_OK
+      * @retval =D3_PARALLEL
       *
       * @author Re.
       *
@@ -1254,8 +1254,8 @@ class sstMath01dPnt3Cls
       *
       * @return long int
       *
-      * @retval = D3_OK
-      * @retval = D3_PARALLEL
+      * @retval =D3_OK
+      * @retval =D3_PARALLEL
       *
       * @author Re.
       *
@@ -1300,8 +1300,8 @@ class sstMath01dPnt3Cls
       *
       * @return int
       *
-      * @retval = D2_OK
-      * @retval = -1: Key nicht Null
+      * @retval =D2_OK
+      * @retval =-1: Key nicht Null
       *
       * @ingroup Geometrie
       *
@@ -1437,9 +1437,9 @@ class sstMath01dPnt3Cls
  *
  * @return Errorstate
  *
- * @retval   = 1: Within the Limitations
- * @retval   = 0: Outside
- * @retval   < 0: Unspecified Error
+ * @retval   =1: Within the Limitations
+ * @retval   =0: Outside
+ * @retval   <0: Unspecified Error
  *
  * @author ur
  *
@@ -1468,13 +1468,13 @@ class sstMath01dPnt3Cls
  *
  * @return Errorstate
  *
- * @retval   =  1: OK
- * @retval   =  0: Kein Schnittpunkt
- * @retval   = -1: Wrong Key
- * @retval   = -2: Punkte 1 und 2 identisch
- * @retval   = -3: Punkte 3 und 4 identisch
- * @retval   = -4: Ebenenbildung nicht möglich
- * @retval   = -5: Keinen Schnittpunkt gefunden, Parallel?
+ * @retval    =1: OK
+ * @retval    =0: Kein Schnittpunkt
+ * @retval   =-1: Wrong Key
+ * @retval   =-2: Punkte 1 und 2 identisch
+ * @retval   =-3: Punkte 3 und 4 identisch
+ * @retval   =-4: Ebenenbildung nicht möglich
+ * @retval   =-5: Keinen Schnittpunkt gefunden, Parallel?
  *
  * @author Re.
  *
@@ -1768,15 +1768,15 @@ class sstMath01Mbr2Cls
      *
      * @return Fehlerstatus
      *
-     * @retval     0 : PrÃŒfpunkt liegt innerhalb
-     * @retval bit 0 : X auÃerhalb der Min-Max-Werte
-     * @retval bit 1 : Y auÃerhalb der Min-Max-Werte
-     * @retval    -1 : Feld Mima nicht korrekt
-     * @retval   -10 : unzulÃ€ssiger Key <> 0
+     * @retval     0: Prüfpunkt liegt innerhalb
+     * @retval bit_0: X außerhalb der Min-Max-Werte
+     * @retval bit_1: Y außerhalb der Min-Max-Werte
+     * @retval    -1: Feld Mima nicht korrekt
+     * @retval   -10: unzulässiger Key <> 0
      */
      int Pruef2 ( int      iKey,   // Vorerst immer 0
-                        double   X,     // PrÃŒfwert: Punkt-X
-                        double   Y);    // PrÃŒfwert: Punkt-Y
+                  double   X,      // Prüfwert: Punkt-X
+                  double   Y);     // Prüfwert: Punkt-Y
 
      //==============================================================================
      /**
@@ -1789,22 +1789,22 @@ class sstMath01Mbr2Cls
      * Geändert: 06.02.03  UR
      *
      * @param iKey  [in] Vorerst immer 0
-     * @param X     [in] PrÃŒfwert: Punkt-X
-     * @param Y     [in] PrÃŒfwert: Punkt-Y
+     * @param X     [in] Prüfwert: Punkt-X
+     * @param Y     [in] Prüfwert: Punkt-Y
      * @param Tol   [in] Tolerance Value
      *
      * @return Fehlerstatus
      *
-     * @retval     0 : PrÃŒfpunkt liegt innerhalb
-     * @retval bit 0 : X auÃerhalb der Min-Max-Werte
-     * @retval bit 1 : Y auÃerhalb der Min-Max-Werte
-     * @retval    -1 : Feld Mima nicht korrekt
-     * @retval   -10 : unzulÃ€ssiger Key <> 0
+     * @retval     0: Prüfpunkt liegt innerhalb
+     * @retval bit_0: X außerhalb der Min-Max-Werte
+     * @retval bit_1: Y außerhalb der Min-Max-Werte
+     * @retval    -1: Feld Mima nicht korrekt
+     * @retval   -10: unzulässiger Key <> 0
      */
-     int PruefT2( int    iKey,    // v  -> Key vorerst immmer 0
-                        double   X,      // v  -> PrÃŒfwert: Punkt-X
-                        double   Y,      // v  -> PrÃŒfwert: Punkt-Y
-                        double   Tol);    // v  -> Toleranzwert
+     int PruefT2( int    iKey,      // v  -> Key vorerst immmer 0
+                  double   X,       // v  -> Prüfwert: Punkt-X
+                  double   Y,       // v  -> Prüfwert: Punkt-Y
+                  double   Tol);    // v  -> Toleranzwert
      //==============================================================================
      /**
      * @brief Test, ob Ãberdeckung vorliegt
@@ -2422,9 +2422,9 @@ class sstMath01CoorTrnCls
      * @date 02.05.13
      */
      //-----------------------------------------------------------------------------
-     int Pnt3DC_WC3 ( int             iKey,
-                             sstMath01ulPnt3Cls    *DC_Pnt,
-                             sstMath01dPnt3Cls     *WC_Pnt);
+     int Pnt3DC_WC3 ( int                    iKey,
+                      sstMath01ulPnt3Cls    *DC_Pnt,
+                      sstMath01dPnt3Cls     *WC_Pnt);
      //=============================================================================
      /**
      * @brief Calculate all intern coordinate transformation matrixes
@@ -2435,9 +2435,9 @@ class sstMath01CoorTrnCls
      * iKey = 1; Center of Device Coordinate System is lower left  <BR>
      * iKey = 2; Center of Device Coordinate System is at Zero/Zero left  <BR>
      *
-     * Changed: 24.04.13  UR
+     * Changed: 20.10.20  ur
      *
-     * @param iKey      [in]  0 or 1
+     * @param iKey      [in]  0,1 or 2
      * @param WC_Mima   [in]  boundary box for world coordinates
      * @param ulDB_Max  [in]  Maximum for model (intern database) coordinates
      * @param dDC_Max   [in]  Maximum for device coordinates
@@ -2834,8 +2834,8 @@ class sstMath01AngCalcCls
      *
      * @return Positon of Angle
      *
-     * @retval   = 0: Find Angle is right
-     * @retval   = 1: Find Angle is left
+     * @retval   =0: Find Angle is right
+     * @retval   =1: Find Angle is left
      */
      // ----------------------------------------------------------------------------
      int FindPosition (int iKey, double dGivenAngle, double dFindAngle);
@@ -2889,8 +2889,8 @@ class sstMath01AngCalcCls
      *
      * @return Return between or not
      *
-     * @retval   = 0: Given Angle is not between
-     * @retval   = 1: Given Angle is between
+     * @retval   =0: Given Angle is not between
+     * @retval   =1: Given Angle is between
      */
      // ----------------------------------------------------------------------------
      int ArcInside (int iKey, double dAngle1, double dAngle2, double dTestAngle);

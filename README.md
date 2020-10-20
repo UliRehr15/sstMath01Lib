@@ -40,3 +40,4 @@ Structure of coding projects should be:
 20200127: Version 1.16: Better Names for Defines, more functions for coordinate transformation. <BR>
 20201020: Version 1.17: Add Mode for Transform Screen Coordinates: Transform to Screen Center. <BR>
                         It is used by Qt QPainterPath Displaying System. <BR>
+20201020: Version 1.18: Small corrections in Doxygen Dokumentation. <BR>
