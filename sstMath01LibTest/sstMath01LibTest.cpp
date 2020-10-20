@@ -33,70 +33,141 @@ int main ()
   sstMath01ulPnt3Cls ulMC_Pnt1;  // model (database) coordinates (unsigned long)
   sstMath01ulPnt3Cls ulMC_Pnt2;
 
-  unsigned long ulDB_Max = 1000000;  // maximum of unsigned long coordinates
-  // double dDC_Max = 1000.0;           // Maximum of device coodinates
-  double dDC_Max = 400.0;           // Maximum of device coodinates
+  {
 
-  sstMath01CoorTrnCls oCoorTrn;  // transformation manager
+    unsigned long ulDB_Max = 1000000;  // maximum of unsigned long coordinates
+    double dDC_Max = 400.0;           // Maximum of device coodinates
 
-  float fLim = 0.001;
+    sstMath01CoorTrnCls oCoorTrn;  // transformation manager
 
-  sstMath01Mbr2Cls sWC_MiMa;  // Boundings for world coordinates
-  sWC_MiMa.Koor2(0,32538589.0,5801400.0);
-  sWC_MiMa.Koor2(0,32541354.0,5804394.0);
+    float fLim = 0.001;
 
-  Pnt1.x =  32538589.0;  // test point 1
-  Pnt1.y =   5801400.0;
-  Pnt2.x =  32541354.0;  // test point 2
-  Pnt2.y =   5804394.0;
 
-  sstMath01dPnt3Cls dDcPnt1 = Pnt1;
-  sstMath01dPnt3Cls dDcPnt2 = Pnt2;
+    Pnt1.x =  32538589.0;  // test point 1
+    Pnt1.y =   5801400.0;
+    Pnt2.x =  32541354.0;  // test point 2
+    Pnt2.y =   5804394.0;
 
-  double dWcDist = Pnt1.Strecke(&Pnt2);  // Calculate Distance in world coordinates
+    sstMath01Mbr2Cls sWC_MiMa;  // Boundings for world coordinates
+    sWC_MiMa.Koor2( 0, Pnt1.x, Pnt1.y);
+    sWC_MiMa.Koor2( 0, Pnt2.x, Pnt2.y);
 
-  // calculate Transformations
-  iStat = oCoorTrn.Calc_All ( 1, sWC_MiMa, ulDB_Max, dDC_Max);
+    sstMath01dPnt3Cls dDcPnt1 = Pnt1;
+    sstMath01dPnt3Cls dDcPnt2 = Pnt2;
 
-  // Transform points itself to screen coordinates
-  iStat = oCoorTrn.Transform_WC_DC(0,&dDcPnt1.x,&dDcPnt1.y);
-  iStat = oCoorTrn.Transform_WC_DC(0,&dDcPnt2.x,&dDcPnt2.y);
+    double dWcDist = Pnt1.Strecke(&Pnt2);  // Calculate Distance in world coordinates
 
-  // calculate distance on screen
-  double dDcDist1 = dDcPnt1.Strecke(&dDcPnt2);
+    // calculate Transformations, Device origin should be lower/left
+    iStat = oCoorTrn.Calc_All ( 1, sWC_MiMa, ulDB_Max, dDC_Max);
 
-  // calculate screen distance with function
-  double dDcDist2 = oCoorTrn.Transform_WC_DC_Dist(dWcDist);
+    // Transform points itself to screen coordinates
+    iStat = oCoorTrn.Transform_WC_DC(0,&dDcPnt1.x,&dDcPnt1.y);
+    iStat = oCoorTrn.Transform_WC_DC(0,&dDcPnt2.x,&dDcPnt2.y);
 
-  // had to be identical
-  assert(dDcDist2 >= (dDcDist1 - fLim) && dDcDist2 <= (dDcDist1 + fLim));
+    // calculate distance on screen
+    double dDcDist1 = dDcPnt1.Strecke(&dDcPnt2);
 
-  // calculate device/screen points
-  iStat = oCoorTrn.Pnt3WC_DC2 ( 0, &Pnt1, &fDC_Pnt1);
-  iStat = oCoorTrn.Pnt3WC_DC2 ( 0, &Pnt2, &fDC_Pnt2);
+    // calculate screen distance with function
+    double dDcDist2 = oCoorTrn.Transform_WC_DC_Dist(dWcDist);
 
-  assert(fDC_Pnt1.x >= (0.0 - fLim) && fDC_Pnt1.x <= (0.0 + fLim));
-  assert(fDC_Pnt1.y >= (0.0 - fLim) && fDC_Pnt1.y <= (0.0 + fLim));
-  // assert(fDC_Pnt2.x >= (dDC_Max - fLim) && fDC_Pnt2.x <= (dDC_Max + fLim));
-  assert(fDC_Pnt2.y >= (dDC_Max - fLim) && fDC_Pnt2.y <= (dDC_Max + fLim));
+    // had to be identical
+    assert(dDcDist2 >= (dDcDist1 - fLim) && dDcDist2 <= (dDcDist1 + fLim));
 
-  // calculate model points
-  iStat = oCoorTrn.Pnt3WC_MC ( 0, &Pnt1, &ulMC_Pnt1);
-  iStat = oCoorTrn.Pnt3WC_MC ( 0, &Pnt2, &ulMC_Pnt2);
+    // calculate device/screen points
+    iStat = oCoorTrn.Pnt3WC_DC2 ( 0, &Pnt1, &fDC_Pnt1);
+    iStat = oCoorTrn.Pnt3WC_DC2 ( 0, &Pnt2, &fDC_Pnt2);
 
-  assert(ulMC_Pnt1.x == 0);
-  assert(ulMC_Pnt1.y == 0);
-  // assert(ulMC_Pnt2.x == 1000000);
-  assert(ulMC_Pnt2.y == 1000000);
+    assert(fDC_Pnt1.x >= (0.0 - fLim) && fDC_Pnt1.x <= (0.0 + fLim));
+    assert(fDC_Pnt1.y >= (0.0 - fLim) && fDC_Pnt1.y <= (0.0 + fLim));
+    assert(fDC_Pnt2.y >= (dDC_Max - fLim) && fDC_Pnt2.y <= (dDC_Max + fLim));
 
-  // Recalculate world coodinates
-  iStat = oCoorTrn.Pnt3DC_WC2 ( 0, &fDC_Pnt1, &Pnt3);
-  assert(Pnt3.x >= (Pnt1.x - fLim) && Pnt3.x <= (Pnt1.x + fLim));
-  assert(Pnt3.y >= (Pnt1.y - fLim) && Pnt3.y <= (Pnt1.y + fLim));
+    // calculate model points
+    iStat = oCoorTrn.Pnt3WC_MC ( 0, &Pnt1, &ulMC_Pnt1);
+    iStat = oCoorTrn.Pnt3WC_MC ( 0, &Pnt2, &ulMC_Pnt2);
 
-  iStat = oCoorTrn.Pnt3DC_WC2 ( 0, &fDC_Pnt2, &Pnt3);
-  assert(Pnt3.x >= (Pnt2.x - fLim) && Pnt3.x <= (Pnt2.x + fLim));
-  assert(Pnt3.y >= (Pnt2.y - fLim) && Pnt3.y <= (Pnt2.y + fLim));
+    assert(ulMC_Pnt1.x == 0);
+    assert(ulMC_Pnt1.y == 0);
+    assert(ulMC_Pnt2.y == 1000000);
+
+    // Recalculate world coodinates
+    iStat = oCoorTrn.Pnt3DC_WC2 ( 0, &fDC_Pnt1, &Pnt3);
+    assert(Pnt3.x >= (Pnt1.x - fLim) && Pnt3.x <= (Pnt1.x + fLim));
+    assert(Pnt3.y >= (Pnt1.y - fLim) && Pnt3.y <= (Pnt1.y + fLim));
+
+    iStat = oCoorTrn.Pnt3DC_WC2 ( 0, &fDC_Pnt2, &Pnt3);
+    assert(Pnt3.x >= (Pnt2.x - fLim) && Pnt3.x <= (Pnt2.x + fLim));
+    assert(Pnt3.y >= (Pnt2.y - fLim) && Pnt3.y <= (Pnt2.y + fLim));
+
+  }
+
+  {
+    unsigned long ulDB_Max = 1000000;  // maximum of unsigned long coordinates
+    double dDC_Max = 15000.0;          // Maximum of device coodinates
+
+    sstMath01CoorTrnCls oCoorTrn;  // transformation manager
+
+    float fLim = 0.001;
+
+    // Testdata are in lower Saxony Germany, UTM Zone 32N Coordinates with 8 Digits, EPSG=4647
+    Pnt1.x =  32538589.0;  // test point 1
+    Pnt1.y =   5801400.0;
+    Pnt2.x =  32541354.0;  // test point 2
+    Pnt2.y =   5804394.0;
+
+    sstMath01Mbr2Cls sWC_MiMa;  // Boundings for world coordinates
+    sWC_MiMa.Koor2( 0, Pnt1.x, Pnt1.y);
+    sWC_MiMa.Koor2( 0, Pnt2.x, Pnt2.y);
+
+    sstMath01dPnt3Cls dDcPnt1 = Pnt1;
+    sstMath01dPnt3Cls dDcPnt2 = Pnt2;
+
+    double dWcDist = Pnt1.Strecke(&Pnt2);  // Calculate Distance in world coordinates
+
+    // calculate Transformations, Device origin Zero/Zero should be at center
+    // iStat = oCoorTrn.Calc_All2 ( 1, sWC_MiMa, ulDB_Max, dDC_Max);
+    iStat = oCoorTrn.Calc_All ( 2, sWC_MiMa, ulDB_Max, dDC_Max);
+
+    // Transform points itself to screen coordinates
+    iStat = oCoorTrn.Transform_WC_DC(0,&dDcPnt1.x,&dDcPnt1.y);
+    iStat = oCoorTrn.Transform_WC_DC(0,&dDcPnt2.x,&dDcPnt2.y);
+
+    // calculate distance on screen
+    double dDcDist1 = dDcPnt1.Strecke(&dDcPnt2);
+
+    // calculate screen distance with function
+    double dDcDist2 = oCoorTrn.Transform_WC_DC_Dist(dWcDist);
+
+    // had to be identical
+    assert(dDcDist2 >= (dDcDist1 - fLim) && dDcDist2 <= (dDcDist1 + fLim));
+
+    // calculate device/screen points
+    iStat = oCoorTrn.Pnt3WC_DC2 ( 0, &Pnt1, &fDC_Pnt1);
+    iStat = oCoorTrn.Pnt3WC_DC2 ( 0, &Pnt2, &fDC_Pnt2);
+
+    // Point 1 should be at - DC_Max/2 and Point 2 at + DC_Max/2
+    double dDC_Max_2 = dDC_Max / 2;
+    assert(fDC_Pnt1.y >= (-dDC_Max_2 - fLim) && fDC_Pnt1.y <= (-dDC_Max_2 + fLim));
+    assert(fDC_Pnt2.y >= (+dDC_Max_2 - fLim) && fDC_Pnt2.y <= (+dDC_Max_2 + fLim));
+
+    // calculate model points
+    iStat = oCoorTrn.Pnt3WC_MC ( 0, &Pnt1, &ulMC_Pnt1);
+    iStat = oCoorTrn.Pnt3WC_MC ( 0, &Pnt2, &ulMC_Pnt2);
+
+    assert(ulMC_Pnt1.x == 0);
+    assert(ulMC_Pnt1.y == 0);
+    assert(ulMC_Pnt2.y == 1000000);
+
+    // Recalculate world coodinates
+    iStat = oCoorTrn.Pnt3DC_WC2 ( 0, &fDC_Pnt1, &Pnt3);
+    assert(Pnt3.x >= (Pnt1.x - fLim) && Pnt3.x <= (Pnt1.x + fLim));
+    assert(Pnt3.y >= (Pnt1.y - fLim) && Pnt3.y <= (Pnt1.y + fLim));
+
+    iStat = oCoorTrn.Pnt3DC_WC2 ( 0, &fDC_Pnt2, &Pnt3);
+    assert(Pnt3.x >= (Pnt2.x - fLim) && Pnt3.x <= (Pnt2.x + fLim));
+    assert(Pnt3.y >= (Pnt2.y - fLim) && Pnt3.y <= (Pnt2.y + fLim));
+
+
+  }
 
   // Test general coordinate transformation functions
   iStat = Test_Trn ( 0);

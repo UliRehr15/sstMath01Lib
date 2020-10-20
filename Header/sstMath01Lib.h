@@ -2433,6 +2433,7 @@ class sstMath01CoorTrnCls
      *
      * iKey = 0; Center of Device Coordinate System is upper left  <BR>
      * iKey = 1; Center of Device Coordinate System is lower left  <BR>
+     * iKey = 2; Center of Device Coordinate System is at Zero/Zero left  <BR>
      *
      * Changed: 24.04.13  UR
      *
@@ -2451,10 +2452,10 @@ class sstMath01CoorTrnCls
      * @date 14.01.03
      */
      //-----------------------------------------------------------------------------
-     int Calc_All ( int           iKey,
-                          sstMath01Mbr2Cls      WC_Mima,
-                          unsigned long ulDB_Max,
-                          double            dDC_Max);
+     int Calc_All ( int               iKey,
+                    sstMath01Mbr2Cls  WC_Mima,
+                    unsigned long     ulDB_Max,
+                    double            dDC_Max);
      //==============================================================================
      /**
      * @brief // transform coordinates from world to device (screen)  coordinate system  <BR>
@@ -2544,7 +2545,6 @@ class sstMath01CoorTrnCls
                           sstMath01Mbr2Cls      WC_Mima,
                           unsigned long ulDB_Max,
                           double            dDC_Max);
-
      //=============================================================================
      /**
      * @brief Calculate NPC_DC Matrix
@@ -2677,7 +2677,6 @@ class sstMath01CoorTrnCls
      int Calc_WC_MC ( int           iKey,
                           sstMath01Mbr2Cls      *WC_Mima,
                           unsigned long ulDB_Max);
-//                          sstMath01TrnCls  *TrnWC_MC);
      //=============================================================================
      /**
      * @brief Calculate MC_WC Matrix
@@ -2706,7 +2705,8 @@ class sstMath01CoorTrnCls
      int Calc_MC_DC ( int           iKey,
                           unsigned long ulDB_Max,
                           double        dDC_Max);
-//                          sstMath01TrnCls  *TrnMC_DC);
+     //=============================================================================
+
      //-----------------------------------------------------------------------------
      sstMath01TrnCls sTrnWC_DC;  // coordinate transformation from world to device
      sstMath01TrnCls sTrnWC_MC;  // coordinate transformation from world to model

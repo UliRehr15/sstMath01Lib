@@ -38,3 +38,5 @@ Structure of coding projects should be:
 20190603: Version 1.14: Fixed problems in use of scal, move and rotate of transformation. <BR>
 20190617: Version 1.15: More functions for coordinate transformation of points. <BR>
 20200127: Version 1.16: Better Names for Defines, more functions for coordinate transformation. <BR>
+20201020: Version 1.17: Add Mode for Transform Screen Coordinates: Transform to Screen Center. <BR>
+                        It is used by Qt QPainterPath Displaying System. <BR>

@@ -93,16 +93,16 @@ int sstMath01CoorTrnCls::Calc_NPC_MC ( int           iKey,
 }
 //=============================================================================
 int sstMath01CoorTrnCls::Calc_MC_DC ( int           iKey,
-                     unsigned long ulDB_Max,
-                                          double        dDC_Max)
+                                      unsigned long ulDB_Max,
+                                      double        dDC_Max)
 //-----------------------------------------------------------------------------
 {
   double  dd;
   double dDB_Max = 0.0;
 
-  int iStat;
+  int iStat = 0;
 //.............................................................................
-  if (iKey < 0 || iKey > 1) return -1;
+  if (iKey < 0 || iKey > 2) return -1;
 
   dDB_Max = (double)ulDB_Max;
 
@@ -110,10 +110,8 @@ int sstMath01CoorTrnCls::Calc_MC_DC ( int           iKey,
 
   dd = 1 / dd;
 
-  // Skalierungswerte in Transformation setzen
-
-  if (iKey == 0)
-  {
+  switch (iKey) {
+  case (0): {
     // Da der Nullpunkt des Bildschirmfensters immer links oben liegt,
     // muß das Koordinatensystem auf den Kopf gestellt werden.
     iStat = this->sTrnMC_DC.SetScal( 0, dd, -dd, 1.0);
@@ -121,13 +119,22 @@ int sstMath01CoorTrnCls::Calc_MC_DC ( int           iKey,
     // Da das Koordinatensystem auf dem Kopf steht, liegt der Nullpunkt nicht bei
     // 0/0, sondern bei 0/-dd. Das muß bei der Verschiebung berücksichtigt werden.
     iStat = this->sTrnMC_DC.SetMov( 0,  0.0, dDC_Max,  0.0);
-
-  }
-  else
-  {
+  };break;
+  case (1): {
     // Da der Nullpunkt des Bildschirmfensters immer links oben liegt,
     // muß das Koordinatensystem auf den Kopf gestellt werden.
     iStat = this->sTrnMC_DC.SetScal( 0, dd, dd, 1.0);
+  };break;
+  case (2): {
+    // Da der Nullpunkt des Bildschirmfensters immer links oben liegt,
+    // muß das Koordinatensystem auf den Kopf gestellt werden.
+    iStat = this->sTrnMC_DC.SetScal( 0, dd, dd, 1.0);
+
+    // Da das Koordinatensystem auf dem Kopf steht, liegt der Nullpunkt nicht bei
+    // 0/0, sondern bei 0/-dd. Das muß bei der Verschiebung berücksichtigt werden.
+    iStat = this->sTrnMC_DC.SetMov( 0,  -(dDC_Max/2.0), -(dDC_Max/2.0),  0.0);
+  };break;
+  default: assert(0);
 
   }
 
@@ -185,7 +192,7 @@ int sstMath01CoorTrnCls::Calc_WC_MC ( int           iKey,        // v  -> Vorers
 
   int iStat = 0;
 //.............................................................................
-  if (iKey < 0 || iKey > 1) return -1;
+  if (iKey < 0 || iKey > 2) return -1;
 
   // Transformation von Weltkoordinaten in Video-Referenz-Koordinaten berechnen
   iStat = Calc_WC_VRC ( 0, WC_Mima, &TrnWC_VRC);
@@ -214,7 +221,7 @@ int sstMath01CoorTrnCls::Calc_WC_DC ( int               iKey,
 
   int iStat;
 //.............................................................................
-  if (iKey < 0 || iKey > 1) return -1;
+  if (iKey < 0 || iKey > 2) return -1;
 
   // Transformation von Weltkoordinaten in Video-Referenz-Koordinaten berechnen
   iStat = this->Calc_WC_VRC ( 0, &WC_Mima, &TrnWC_VRC);
@@ -239,25 +246,22 @@ int sstMath01CoorTrnCls::Calc_WC_DC ( int               iKey,
 }
 //=============================================================================
 int sstMath01CoorTrnCls::Calc_All ( int               iKey,
-                                          sstMath01Mbr2Cls  WC_Mima,
-                                          unsigned long     ulDB_Max,
-                                          double            dDC_Max)
+                                    sstMath01Mbr2Cls  WC_Mima,
+                                    unsigned long     ulDB_Max,
+                                    double            dDC_Max)
 //-----------------------------------------------------------------------------
 {
   sstMath01TrnCls  TrnWC_VRC;   //  WC_VRC_Transformation
   sstMath01TrnCls  TrnVRC_NPC;  //  VRC_NPC_Transformation
   sstMath01TrnCls  TrnNPC_MC;   //  NPC_MC_Transformation
 
-  int iStat;
+  int iStat = 0;
 //.............................................................................
-  if (iKey < 0 || iKey > 1) return -1;
+  if (iKey < 0 || iKey > 2) return -1;
 
-//  iStat = this->Calc_WC_DC ( 1, WC_Mima, ulDB_Max, dDC_Max);
-//  iStat = this->Calc_WC_MC ( 0, &WC_Mima, ulDB_Max);
-//  iStat = this->Calc_MC_DC ( 1, ulDB_Max, dDC_Max);
-  iStat = this->Calc_WC_DC ( iKey, WC_Mima, ulDB_Max, dDC_Max);
-  iStat = this->Calc_WC_MC ( iKey, &WC_Mima, ulDB_Max);
-  iStat = this->Calc_MC_DC ( iKey, ulDB_Max, dDC_Max);
+  if (iStat >= 0) iStat = this->Calc_WC_DC ( iKey, WC_Mima, ulDB_Max, dDC_Max);
+  if (iStat >= 0) iStat = this->Calc_WC_MC ( iKey, &WC_Mima, ulDB_Max);
+  if (iStat >= 0) iStat = this->Calc_MC_DC ( iKey, ulDB_Max, dDC_Max);
 
   return iStat;
 }
@@ -413,7 +417,6 @@ int sstMath01CoorTrnCls::Pnt3DC_WC3 ( int             iKey,
 
   return iStat;
 }
-//=============================================================================
 //=============================================================================
 int sstMath01CoorTrnCls::Transform_WC_DC (int iKey, double *dX, double *dY)
 //-----------------------------------------------------------------------------

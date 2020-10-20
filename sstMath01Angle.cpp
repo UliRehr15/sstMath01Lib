@@ -163,12 +163,10 @@ int sstMath01AngCalcCls::Mat2Geo ( int   Key,   // v  -> Vorerst immer 0
   double loc_pi;     // Konstande PI, wie in Mathem definiert
   double loc_pih;    // Abgeleitet PI/Halbe
   double loc_2pi;    // Abgeleitet 2PI
-  int iret;
   int iStat;
 //.............................................................................
   if (Key != 0) return -1;
-  iret = 0;
-  // istat = 0;
+  iStat = 0;
 
   loc_pi =  dSSTMATH01_PI;   // Define aus Mathem
   loc_pih = loc_pi / 2.0;
@@ -181,7 +179,7 @@ int sstMath01AngCalcCls::Mat2Geo ( int   Key,   // v  -> Vorerst immer 0
   // Richtungswinkel (Double) in den Bereich 0 bis 2PI normieren
   iStat = this->Norm8 ( 0, GWnk);
 
-  return iret;
+  return iStat;
 }
 //=============================================================================
 /**
@@ -211,7 +209,6 @@ int sstMath01AngCalcCls::Mat2Geo ( int   Key,   // v  -> Vorerst immer 0
 int sstMath01AngCalcCls::FindPosition (int iKey, double dWink1, double dWink2)
 //-----------------------------------------------------------------------------
 {
-  int iRet  = 0;
   int iStat = 0;
 //-----------------------------------------------------------------------------
   if ( iKey != 0) return -1;
@@ -223,10 +220,10 @@ int sstMath01AngCalcCls::FindPosition (int iKey, double dWink1, double dWink2)
 
   if (dWink2 >= 0.0 && dWink2 < dSSTMATH01_PI)
   {
-    iRet = 1;
+    iStat = 1;
   }
 
-  return iRet;
+  return iStat;
 }
 //=============================================================================
 /**
