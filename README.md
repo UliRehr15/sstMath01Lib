@@ -11,7 +11,7 @@ Coordinate Transformations classes (Trn) between
 Class for Minimum Bounding Rectangles (Mbr)
 Class for Calculating with Angle Values
 
-This Library is created with QtCreator 4.5.2 and gcc 7.3.0.
+This Library is created with QtCreator 4.11.0 and gcc 9.3.0.
 
 Structure of coding projects should be:
 
@@ -41,3 +41,4 @@ Structure of coding projects should be:
 20201020: Version 1.17: Add Mode for Transform Screen Coordinates: Transform to Screen Center. <BR>
                         It is used by Qt QPainterPath Displaying System. <BR>
 20201020: Version 1.18: Small corrections in Doxygen Dokumentation. <BR>
+20210122: Version 1.19: New d2 Double Point class function -CircleCalcCenterWithTwoPntsAndRad-. <BR>

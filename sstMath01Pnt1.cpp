@@ -673,6 +673,63 @@ int sstMath01dPnt2Cls::sstMat_PktIdent ( int      iKey,   // v  -> Vorerst immer
   return iRet;
 }
 //=============================================================================
+sstMath01dPnt2Cls sstMath01dPnt2Cls::CircleCalcCenterWithTwoPntsAndRad ( sstMath01dPnt2Cls d2Pnt2,
+                                                                         const double dRad)
+//-----------------------------------------------------------------------------
+{
+  int iStat = 0;
+//----------------------------------------------------------------------------
+  sstMath01dPnt2Cls d2PntCenter;  // Result Center point of circle
+
+  // sstMath01dPnt2Cls d2PntLoc1;  // first local point of circle is (0,0)
+  sstMath01dPnt2Cls d2PntLoc2;  // second local point of circle is (0, dDist/2)
+  sstMath01dPnt2Cls d2PntLocM;  // center point in local coordinates
+
+  // Calculate distance and angle from first point to second point
+  double dDist = 0.0;
+  double dWink1 = 0.0;
+  iStat = this->Kart_Rel( 0, &d2Pnt2, &dWink1, &dDist);
+
+  if (dDist <= 0.0) return d2PntCenter;
+
+  // calculate first cathete
+  double dKat1 = dDist / 2;
+  d2PntLoc2.Set( 0, dKat1);
+
+  // Calculate second cathete
+  double dKat2 = 0;
+  iStat = this->Pytha_Kath(0, dKat1, abs (dRad), &dKat2);
+
+  // Calculate center point in local coordinates
+  if (dRad > 0.0)
+    d2PntLocM.Set(  dKat2, dKat1);  // Center is right from Pnt1>Pnt2
+  else
+    d2PntLocM.Set( -dKat2, dKat1);  // Center is  left from Pnt1>Pnt2
+
+  // calculate angle to center point in local system
+  double dWink2 = 0;
+  d2PntLocM.Kart_Abs( 0, &dWink2, &dDist);
+  dWink2 = dWink2 - dSSTMATH01_PIH;
+
+  // Calculate absolute Angle and norm to TwoPI.
+  double dWink = dWink1 + dWink2;
+  sstMath01AngCalcCls oAngleManager;
+  oAngleManager.Norm8( 0, &dWink);
+
+  // Calculate Center from Circle from first point polar.
+  this->Polar_Rel( 0, dWink, abs(dRad), &d2PntCenter);
+
+  // Check Center point
+  d2PntCenter.Kart_Rel(0, this, &dWink, &dDist);
+  // assert (dDist == dRad);
+  d2PntCenter.Kart_Rel(0, &d2Pnt2, &dWink, &dDist);
+  // assert (dDist == dRad);
+  // Fatal Errors goes to an assert
+  assert(iStat >= 0);
+
+  return d2PntCenter;
+}
+//=============================================================================
 double sstMath01dPnt3Cls::VBetrag ()
 {
 //...........................................................3D-Vektorbetrag....

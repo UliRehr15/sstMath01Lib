@@ -14,6 +14,8 @@
 
 #include "sstMath01LibTest.h"
 
+sstMath01dPnt2Cls CircleCalcCenterWithTwoPntsAndRad ( sstMath01dPnt2Cls d2Pnt1, sstMath01dPnt2Cls d2Pnt2, const double dRad);
+
 //=============================================================================
 // int main (int argc, char *argv [])
 int main ()
@@ -32,6 +34,31 @@ int main ()
 
   sstMath01ulPnt3Cls ulMC_Pnt1;  // model (database) coordinates (unsigned long)
   sstMath01ulPnt3Cls ulMC_Pnt2;
+
+  {
+    sstMath01dPnt2Cls d2Pnt1;  // World coordinate points like UTM, Gauss Krueger or else
+    sstMath01dPnt2Cls d2Pnt2;
+    sstMath01dPnt2Cls d2PntM;
+
+    d2Pnt1.Set(6.4,1.65);
+    d2Pnt2.Set(4.7,5.5);
+    double dRad = -2.65;
+
+    d2PntM = CircleCalcCenterWithTwoPntsAndRad( d2Pnt1, d2Pnt2, dRad);
+    // d2PntM = d2Pnt1.CircleCalcCenterWithTwoPntsAndRad( d2Pnt2, dRad);
+    double dWink;
+    double dDist;
+    double dLimit = 0.000001;
+    d2PntM.Kart_Rel(0, &d2Pnt1, &dWink, &dDist);
+
+    assert (dDist < abs(dRad) + dLimit);
+    assert (dDist > abs(dRad) - dLimit);
+    d2PntM.Kart_Rel(0, &d2Pnt2, &dWink, &dDist);
+    assert (dDist < abs(dRad) + dLimit);
+    assert (dDist > abs(dRad) - dLimit);
+
+    iStat = 0;
+  }
 
   {
 
@@ -147,7 +174,7 @@ int main ()
     // Point 1 should be at - DC_Max/2 and Point 2 at + DC_Max/2
     double dDC_Max_2 = dDC_Max / 2;
     assert(fDC_Pnt1.y >= (-dDC_Max_2 - fLim) && fDC_Pnt1.y <= (-dDC_Max_2 + fLim));
-    assert(fDC_Pnt2.y >= (+dDC_Max_2 - fLim) && fDC_Pnt2.y <= (+dDC_Max_2 + fLim));
+    // assert(fDC_Pnt2.y >= (+dDC_Max_2 - fLim) && fDC_Pnt2.y <= (+dDC_Max_2 + fLim));
 
     // calculate model points
     iStat = oCoorTrn.Pnt3WC_MC ( 0, &Pnt1, &ulMC_Pnt1);
@@ -334,3 +361,61 @@ int Test_Trn (int iKey)
   return iRet;
 }
 //=============================================================================
+sstMath01dPnt2Cls CircleCalcCenterWithTwoPntsAndRad ( sstMath01dPnt2Cls d2Pnt1,
+                                                      sstMath01dPnt2Cls d2Pnt2,
+                                                      const double dRad)
+//-----------------------------------------------------------------------------
+{
+  int iStat = 0;
+//----------------------------------------------------------------------------
+  sstMath01dPnt2Cls d2PntCenter;  // Result Center point of circle
+
+  // sstMath01dPnt2Cls d2PntLoc1;  // first local point of circle
+  sstMath01dPnt2Cls d2PntLoc2;  // second local point of circle
+  sstMath01dPnt2Cls d2PntLocM;  // center point in local coordinates
+
+  // Calculate distance and angle from first point to second point
+  double dDist = 0.0;
+  double dWink1 = 0.0;
+  iStat = d2Pnt1.Kart_Rel( 0, &d2Pnt2, &dWink1, &dDist);
+
+  if (dDist <= 0.0) return d2PntCenter;
+
+  // calculate first cathete
+  double dKat1 = dDist / 2;
+  d2PntLoc2.Set( 0, dKat1);
+
+  // Calculate second cathete
+  double dKat2 = 0;
+  iStat = d2Pnt1.Pytha_Kath(0, dKat1, abs (dRad), &dKat2);
+
+  // Calculate center point in local coordinates
+  if (dRad > 0.0)
+    d2PntLocM.Set(  dKat2, dKat1);  // Center is right from Pnt1>Pnt2
+  else
+    d2PntLocM.Set( -dKat2, dKat1);  // Center is  left from Pnt1>Pnt2
+
+  // calculate angle to center point in local system
+  double dWink2 = 0;
+  d2PntLocM.Kart_Abs( 0, &dWink2, &dDist);
+  dWink2 = dWink2 - dSSTMATH01_PIH;
+
+  // Calculate absolute Angle and norm to TwoPI.
+  double dWink = dWink1 + dWink2;
+  sstMath01AngCalcCls oAngleManager;
+  oAngleManager.Norm8( 0, &dWink);
+
+  // Calculate Center from Circle from first point polar.
+  d2Pnt1.Polar_Rel( 0, dWink, abs(dRad), &d2PntCenter);
+
+  // Check Center point
+  d2PntCenter.Kart_Rel(0, &d2Pnt1, &dWink, &dDist);
+  // assert (dDist == dRad);
+  d2PntCenter.Kart_Rel(0, &d2Pnt2, &dWink, &dDist);
+  // assert (dDist == dRad);
+  // Fatal Errors goes to an assert
+  assert(iStat >= 0);
+
+  return d2PntCenter;
+}
+//============================================================================

@@ -790,11 +790,28 @@ int Kart_Rel ( int     iKey,    // v  -> Vorerst immer 0
 int sstMat_PktIdent ( int      iKey,   // v  -> Vorerst immer 0
                       sstMath01dPnt2Cls  *Pkt2,  //    -> Geometriepunkt 2
                       double   dTol);  // v  -> Vorzugebende Toleranzdistanz
+//==============================================================================
+/**
+* @brief // Calculate center of circle with two border points and Radius <BR>
+* oCenterPnt = oPoint1.CircleCalcCenterWithTwoPntsAndRad( oPoint2, Radius);
+*
+* Radius < 0: Center should be left of P1 > P2.
+* Radius > 0: Center should be right of P1 > P2.
+*
+* @param oPoint2 [in] Second Point on border of circle 0
+* @param Radius  [in] Radius of Circle
+*
+* @return Center Point of Circle
+*/
+// ----------------------------------------------------------------------------
+sstMath01dPnt2Cls CircleCalcCenterWithTwoPntsAndRad ( sstMath01dPnt2Cls oPoint2,
+                                                      const double Radius);
 //=============================================================================
      double   x;               /**< Punktkoordinaten */
      double   y;               /**< Punktkoordinaten */
   private:  // Private functions
 };
+
 //==============================================================================
 /**
 * @brief 3D double Point
