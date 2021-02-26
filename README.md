@@ -42,3 +42,4 @@ Structure of coding projects should be:
                         It is used by Qt QPainterPath Displaying System. <BR>
 20201020: Version 1.18: Small corrections in Doxygen Dokumentation. <BR>
 20210122: Version 1.19: New d2 Double Point class function -CircleCalcCenterWithTwoPntsAndRad-. <BR>
+20210205: Version 1.20: Small corrections with CircleCalcCenterWithTwoPntsAndRad. <BR>

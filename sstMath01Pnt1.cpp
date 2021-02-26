@@ -681,20 +681,35 @@ sstMath01dPnt2Cls sstMath01dPnt2Cls::CircleCalcCenterWithTwoPntsAndRad ( sstMath
 //----------------------------------------------------------------------------
   sstMath01dPnt2Cls d2PntCenter;  // Result Center point of circle
 
-  // sstMath01dPnt2Cls d2PntLoc1;  // first local point of circle is (0,0)
   sstMath01dPnt2Cls d2PntLoc2;  // second local point of circle is (0, dDist/2)
   sstMath01dPnt2Cls d2PntLocM;  // center point in local coordinates
+
+  d2PntCenter = (*this);
+
+  // If Rad is negative: Center is left from P1 - P2
+  // if Rad is positive: Center is right from P1 - P2
 
   // Calculate distance and angle from first point to second point
   double dDist = 0.0;
   double dWink1 = 0.0;
   iStat = this->Kart_Rel( 0, &d2Pnt2, &dWink1, &dDist);
 
-  if (dDist <= 0.0) return d2PntCenter;
+  // Check some logics
+  if (dDist <= 0.0)
+  { // Point 1 and 2 are equal
+    assert(0);
+    return d2PntCenter;
+  }
+  if (dDist > 2*abs(dRad))
+  {
+    // Distance Point 1 to 2 is too great
+    assert(0);
+    return d2PntCenter;
+  }
 
   // calculate first cathete
   double dKat1 = dDist / 2;
-  d2PntLoc2.Set( 0, dKat1);
+  d2PntLoc2.Set( 0, dKat1);  // Point 2 in local coordinates
 
   // Calculate second cathete
   double dKat2 = 0;

@@ -793,12 +793,12 @@ int sstMat_PktIdent ( int      iKey,   // v  -> Vorerst immer 0
 //==============================================================================
 /**
 * @brief // Calculate center of circle with two border points and Radius <BR>
-* oCenterPnt = oPoint1.CircleCalcCenterWithTwoPntsAndRad( oPoint2, Radius);
+* oCenterPnt = oPoint1.CircleCalcCenterWithTwoPntsAndRad( oPoint2, Radius); <BR>
 *
-* Radius < 0: Center should be left of P1 > P2.
-* Radius > 0: Center should be right of P1 > P2.
+* Radius < 0: Center should be left of P1 > P2.  <BR>
+* Radius > 0: Center should be right of P1 > P2. <BR>
 *
-* @param oPoint2 [in] Second Point on border of circle 0
+* @param oPoint2 [in] Second Point on border of circle
 * @param Radius  [in] Radius of Circle
 *
 * @return Center Point of Circle
