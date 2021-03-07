@@ -43,3 +43,4 @@ Structure of coding projects should be:
 20201020: Version 1.18: Small corrections in Doxygen Dokumentation. <BR>
 20210122: Version 1.19: New d2 Double Point class function -CircleCalcCenterWithTwoPntsAndRad-. <BR>
 20210205: Version 1.20: Small corrections with CircleCalcCenterWithTwoPntsAndRad. <BR>
+20210307: Version 1.21: Small corrections in Calculate Angle Differences. <BR>

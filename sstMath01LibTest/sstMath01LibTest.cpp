@@ -14,7 +14,7 @@
 
 #include "sstMath01LibTest.h"
 
-sstMath01dPnt2Cls CircleCalcCenterWithTwoPntsAndRad ( sstMath01dPnt2Cls d2Pnt1, sstMath01dPnt2Cls d2Pnt2, const double dRad);
+// sstMath01dPnt2Cls CircleCalcCenterWithTwoPntsAndRad ( sstMath01dPnt2Cls d2Pnt1, sstMath01dPnt2Cls d2Pnt2, const double dRad);
 
 //=============================================================================
 // int main (int argc, char *argv [])
@@ -25,6 +25,8 @@ int main ()
   int iStat = 0;
 //-----------------------------------------------------------------------------
 
+  iStat = Test_Angle (0);
+
   sstMath01dPnt3Cls Pnt1;  // World coordinate points like UTM, Gauss Krueger or else
   sstMath01dPnt3Cls Pnt2;
   sstMath01dPnt3Cls Pnt3;
@@ -34,6 +36,17 @@ int main ()
 
   sstMath01ulPnt3Cls ulMC_Pnt1;  // model (database) coordinates (unsigned long)
   sstMath01ulPnt3Cls ulMC_Pnt2;
+  {
+    sstMath01TrnCls oTrn;
+    oTrn.SetMov ( 0, -500, -500, 0);
+    oTrn.SetScal ( 0, 1,-1,0);  // Mirror at y axis
+    Pnt1.Set(1000,1000,0); // Result should be 500,-500
+    Pnt2.Set(500,500,0);   // Result should be 0,0
+    Pnt3.Set(0,0,0);       // Result should be -500, 500
+    oTrn.CalcPnt3X( 0, &Pnt1);
+    oTrn.CalcPnt3X( 0, &Pnt2);
+    oTrn.CalcPnt3X( 0, &Pnt3);
+  }
 
   {
     sstMath01dPnt2Cls d2Pnt1;  // World coordinate points like UTM, Gauss Krueger or else
@@ -43,8 +56,9 @@ int main ()
     d2Pnt1.Set(6.4,1.65);
     d2Pnt2.Set(4.7,5.5);
     double dRad = -2.65;
+    sstMath01AngCalcCls oAngCalc;
 
-    d2PntM = CircleCalcCenterWithTwoPntsAndRad( d2Pnt1, d2Pnt2, dRad);
+    d2PntM = d2Pnt1.CircleCalcCenterWithTwoPntsAndRad( d2Pnt2, dRad);
     // d2PntM = d2Pnt1.CircleCalcCenterWithTwoPntsAndRad( d2Pnt2, dRad);
     double dWink;
     double dDist;
@@ -361,61 +375,35 @@ int Test_Trn (int iKey)
   return iRet;
 }
 //=============================================================================
-sstMath01dPnt2Cls CircleCalcCenterWithTwoPntsAndRad ( sstMath01dPnt2Cls d2Pnt1,
-                                                      sstMath01dPnt2Cls d2Pnt2,
-                                                      const double dRad)
+int Test_Angle (int iKey)
 //-----------------------------------------------------------------------------
 {
   int iStat = 0;
-//----------------------------------------------------------------------------
-  sstMath01dPnt2Cls d2PntCenter;  // Result Center point of circle
+//-----------------------------------------------------------------------------
+  if ( iKey != 0) return -1;
 
-  // sstMath01dPnt2Cls d2PntLoc1;  // first local point of circle
-  sstMath01dPnt2Cls d2PntLoc2;  // second local point of circle
-  sstMath01dPnt2Cls d2PntLocM;  // center point in local coordinates
+  double dAng1 = 0.0;
+  double dAng2 = 0.0;
+  double dAngDiff = 0.0;
+  sstMath01AngCalcCls oAngCalc;
 
-  // Calculate distance and angle from first point to second point
-  double dDist = 0.0;
-  double dWink1 = 0.0;
-  iStat = d2Pnt1.Kart_Rel( 0, &d2Pnt2, &dWink1, &dDist);
+//-----------------------------------------------------------------------------
+  dAng2 = dSSTMATH01_PIH;
+  iStat = oAngCalc.AngleDiff( 0, dAng1, dAng2, &dAngDiff);
+  assert(dAngDiff == dSSTMATH01_PIH);
+//-----------------------------------------------------------------------------
+  dAng2 = dSSTMATH01_PI;
+  iStat = oAngCalc.AngleDiff( 0, dAng1, dAng2, &dAngDiff);
+  assert(dAngDiff == dSSTMATH01_PI);
+//-----------------------------------------------------------------------------
+  dAng2 = dSSTMATH01_PI + dSSTMATH01_PIH;
+  iStat = oAngCalc.AngleDiff( 0, dAng1, dAng2, &dAngDiff);
+  assert(dAngDiff == -dSSTMATH01_PIH);
+//-----------------------------------------------------------------------------
 
-  if (dDist <= 0.0) return d2PntCenter;
-
-  // calculate first cathete
-  double dKat1 = dDist / 2;
-  d2PntLoc2.Set( 0, dKat1);
-
-  // Calculate second cathete
-  double dKat2 = 0;
-  iStat = d2Pnt1.Pytha_Kath(0, dKat1, abs (dRad), &dKat2);
-
-  // Calculate center point in local coordinates
-  if (dRad > 0.0)
-    d2PntLocM.Set(  dKat2, dKat1);  // Center is right from Pnt1>Pnt2
-  else
-    d2PntLocM.Set( -dKat2, dKat1);  // Center is  left from Pnt1>Pnt2
-
-  // calculate angle to center point in local system
-  double dWink2 = 0;
-  d2PntLocM.Kart_Abs( 0, &dWink2, &dDist);
-  dWink2 = dWink2 - dSSTMATH01_PIH;
-
-  // Calculate absolute Angle and norm to TwoPI.
-  double dWink = dWink1 + dWink2;
-  sstMath01AngCalcCls oAngleManager;
-  oAngleManager.Norm8( 0, &dWink);
-
-  // Calculate Center from Circle from first point polar.
-  d2Pnt1.Polar_Rel( 0, dWink, abs(dRad), &d2PntCenter);
-
-  // Check Center point
-  d2PntCenter.Kart_Rel(0, &d2Pnt1, &dWink, &dDist);
-  // assert (dDist == dRad);
-  d2PntCenter.Kart_Rel(0, &d2Pnt2, &dWink, &dDist);
-  // assert (dDist == dRad);
   // Fatal Errors goes to an assert
   assert(iStat >= 0);
 
-  return d2PntCenter;
+  return iStat;
 }
-//============================================================================
+//=============================================================================

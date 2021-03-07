@@ -11,7 +11,7 @@
  * See the COPYING file for more information.
  *
  **********************************************************************/
-// sstMath01Angle.cpp    27.01.20  Re.    24.05.19  Re.
+// sstMath01Angle.cpp    07.03.21  Re.    24.05.19  Re.
 //
 // Funktionen rund um den Winkel als solchen.
 // Datei existiert auch in Bibiothek sstlib.
@@ -218,7 +218,7 @@ int sstMath01AngCalcCls::FindPosition (int iKey, double dWink1, double dWink2)
   // Richtungswinkel (Double) in den Bereich 0 bis 2PI normieren.
   iStat = this->Norm8 ( 0, &dWink2);
 
-  if (dWink2 >= 0.0 && dWink2 < dSSTMATH01_PI)
+  if (dWink2 >= 0.0 && dWink2 <= dSSTMATH01_PI)
   {
     iStat = 1;
   }
